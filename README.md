@@ -7,8 +7,6 @@ git clone https://github.com/Tatu-Armadillo/parquimetro
 
 # How to run the application:
 Run the command in the folder path where the project is located.
-
-command
 ```
 docker-compose up -d
 ```
