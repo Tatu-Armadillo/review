@@ -1,6 +1,6 @@
-package com.fiap.restaurant.review.records;
+package com.fiap.restaurant.review.application.records;
 
-import com.fiap.restaurant.review.model.Address;
+import com.fiap.restaurant.review.infra.models.Address;
 
 public record AddressRecord(
         String cep,

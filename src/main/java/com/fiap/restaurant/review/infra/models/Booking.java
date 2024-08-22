@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.model;
+package com.fiap.restaurant.review.infra.models;
 
 import java.time.LocalDateTime;
 import java.util.Set;

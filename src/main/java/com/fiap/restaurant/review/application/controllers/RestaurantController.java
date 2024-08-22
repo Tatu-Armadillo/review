@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.controller;
+package com.fiap.restaurant.review.application.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.restaurant.review.configuration.web.response.ResponseBase;
-import com.fiap.restaurant.review.records.RestaurantRecord;
-import com.fiap.restaurant.review.service.RestaurantService;
+import com.fiap.restaurant.review.application.records.RestaurantRecord;
+import com.fiap.restaurant.review.domain.services.RestaurantService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;

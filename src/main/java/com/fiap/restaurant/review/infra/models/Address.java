@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.model;
+package com.fiap.restaurant.review.infra.models;
 
 import jakarta.persistence.*;
 import lombok.Data;

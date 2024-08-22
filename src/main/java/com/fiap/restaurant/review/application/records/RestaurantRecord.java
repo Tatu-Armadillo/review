@@ -1,8 +1,8 @@
-package com.fiap.restaurant.review.records;
+package com.fiap.restaurant.review.application.records;
 
 import java.time.LocalTime;
 
-import com.fiap.restaurant.review.model.Restaurant;
+import com.fiap.restaurant.review.infra.models.Restaurant;
 
 public record RestaurantRecord(
         String name,

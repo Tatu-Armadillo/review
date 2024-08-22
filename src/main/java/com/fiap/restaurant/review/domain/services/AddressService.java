@@ -1,10 +1,10 @@
-package com.fiap.restaurant.review.service;
+package com.fiap.restaurant.review.domain.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fiap.restaurant.review.model.Address;
-import com.fiap.restaurant.review.repository.AddressRepository;
+import com.fiap.restaurant.review.infra.models.Address;
+import com.fiap.restaurant.review.infra.repositories.AddressRepository;
 
 @Service
 public class AddressService {
