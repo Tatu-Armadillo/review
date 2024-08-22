@@ -1,5 +1,7 @@
 package com.fiap.restaurant.review.domain.services;
 
+import java.time.LocalTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,12 @@ public class RestaurantService {
         final var address = this.addressService.save(restaurant.getAddress());
         restaurant.setAddress(address);
         restaurant.setTotalGrade(0);
+
+        if (restaurant.getAlwaysOpen() != null && restaurant.getAlwaysOpen()) {
+            restaurant.setOpenHour(LocalTime.of(00, 00, 00));
+            restaurant.setCloseHour(LocalTime.of(23, 59, 59));
+        }
+
         return this.restaurantRepository.save(restaurant);
     }
 
