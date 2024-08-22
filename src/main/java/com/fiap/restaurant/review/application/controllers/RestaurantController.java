@@ -55,7 +55,9 @@ public class RestaurantController {
     @Transactional
     @Operation(summary = "Create new Restaurant", description = "Save information by Restaurant and address", tags = {
             "Restaurant" }, responses = {
-                    @ApiResponse(description = "Create", responseCode = "200", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RestaurantRecord.class))),
+                    @ApiResponse(description = "Create", responseCode = "200", content = {
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = RestaurantRecord.class)),
+                            @Content(mediaType = "application/xml", schema = @Schema(implementation = RestaurantRecord.class)) }),
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
                     @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
                     @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
