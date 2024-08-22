@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.application.records;
+package com.fiap.restaurant.review.application.records.restaruant;
 
 import java.time.LocalTime;
 

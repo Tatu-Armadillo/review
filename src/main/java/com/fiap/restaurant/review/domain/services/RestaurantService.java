@@ -3,6 +3,8 @@ package com.fiap.restaurant.review.domain.services;
 import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fiap.restaurant.review.infra.models.Restaurant;
@@ -18,6 +20,10 @@ public class RestaurantService {
     public RestaurantService(final RestaurantRepository restaurantRepository, final AddressService addressService) {
         this.restaurantRepository = restaurantRepository;
         this.addressService = addressService;
+    }
+
+    public Page<Restaurant> showResturants(final Pageable pageable, final String name) {
+        return this.restaurantRepository.findAllResturantsByName(pageable, name);
     }
 
     public Restaurant save(final Restaurant restaurant) {
