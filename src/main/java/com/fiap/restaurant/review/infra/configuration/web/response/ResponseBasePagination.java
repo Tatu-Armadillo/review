@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.configuration.web.response;
+package com.fiap.restaurant.review.infra.configuration.web.response;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.data.domain.Page;

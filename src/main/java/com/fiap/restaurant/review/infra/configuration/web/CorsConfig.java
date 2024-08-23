@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.configuration.web;
+package com.fiap.restaurant.review.infra.configuration.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

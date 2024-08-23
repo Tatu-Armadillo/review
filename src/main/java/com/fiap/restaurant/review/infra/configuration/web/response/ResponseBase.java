@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.configuration.web.response;
+package com.fiap.restaurant.review.infra.configuration.web.response;
 
 public class ResponseBase<T> {
 

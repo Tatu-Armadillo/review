@@ -67,6 +67,7 @@ begin
         create table restaurants (
             id_restaurant bigserial primary key,
             name varchar(255) not null,
+            cnpj varchar(14) unique not null,
             phone varchar(13) not null,
             food_type varchar(255) not null,
             open_hour time not null,

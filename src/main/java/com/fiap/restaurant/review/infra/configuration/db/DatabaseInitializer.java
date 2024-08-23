@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.configuration.db;
+package com.fiap.restaurant.review.infra.configuration.db;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;

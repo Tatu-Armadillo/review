@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.configuration.doc;
+package com.fiap.restaurant.review.infra.configuration.doc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
