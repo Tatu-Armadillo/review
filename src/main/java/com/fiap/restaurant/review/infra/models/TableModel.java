@@ -8,7 +8,7 @@ import lombok.Data;
 @Entity
 @Table(name = "tables")
 @Data
-public class Tables {
+public class TableModel {
 
     @Id
     @Column(name = "id_table")
@@ -23,10 +23,10 @@ public class Tables {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant", foreignKey = @ForeignKey(name = "fk_table_restaurant"))
-    private Restaurant restaurant;
+    private RestaurantModel restaurant;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tables_bookings", joinColumns = { @JoinColumn(name = "id_booking") }, inverseJoinColumns = { @JoinColumn(name = "id_table") })
-    private Set<Booking> bookings;
+    private Set<BookingModel> bookings;
 
 }

@@ -2,7 +2,7 @@ package com.fiap.restaurant.review.application.records.restaruant;
 
 import java.time.LocalTime;
 
-import com.fiap.restaurant.review.infra.models.Restaurant;
+import com.fiap.restaurant.review.infra.models.RestaurantModel;
 
 public record RestaurantRecord(
         String name,
@@ -14,8 +14,8 @@ public record RestaurantRecord(
         Integer totalCapacity,
         AddressRecord address) {
 
-    public static Restaurant toEntity(final RestaurantRecord record) {
-        final var entity = new Restaurant();
+    public static RestaurantModel toEntity(final RestaurantRecord record) {
+        final var entity = new RestaurantModel();
         entity.setName(record.name);
         entity.setPhone(record.phone);
         entity.setFoodType(record.foodType);
@@ -27,7 +27,7 @@ public record RestaurantRecord(
         return entity;
     }
 
-    public static RestaurantRecord toRecord(final Restaurant entity) {
+    public static RestaurantRecord toRecord(final RestaurantModel entity) {
         return new RestaurantRecord(
                 entity.getName(),
                 entity.getPhone(),

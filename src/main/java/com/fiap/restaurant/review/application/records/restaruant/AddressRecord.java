@@ -1,6 +1,6 @@
 package com.fiap.restaurant.review.application.records.restaruant;
 
-import com.fiap.restaurant.review.infra.models.Address;
+import com.fiap.restaurant.review.infra.models.AddressModel;
 
 public record AddressRecord(
         String cep,
@@ -12,8 +12,8 @@ public record AddressRecord(
         Double latitude,
         Double longitude) {
 
-    public static Address toEntity(final AddressRecord record) {
-        final var entity = new Address();
+    public static AddressModel toEntity(final AddressRecord record) {
+        final var entity = new AddressModel();
         entity.setCep(record.cep);
         entity.setPublicPlace(record.publicPlace);
         entity.setComplement(record.complement);
@@ -25,7 +25,7 @@ public record AddressRecord(
         return entity;
     }
 
-    public static AddressRecord toRecord(final Address entity) {
+    public static AddressRecord toRecord(final AddressModel entity) {
         return new AddressRecord(
                 entity.getCep(),
                 entity.getPublicPlace(),

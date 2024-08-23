@@ -1,6 +1,6 @@
 package com.fiap.restaurant.review.application.records.restaruant;
 
-import com.fiap.restaurant.review.infra.models.Restaurant;
+import com.fiap.restaurant.review.infra.models.RestaurantModel;
 
 public record ListRestaurantRecord(
         String name,
@@ -8,7 +8,7 @@ public record ListRestaurantRecord(
         Integer grade,
         String phone) {
 
-    public static ListRestaurantRecord toRecord(final Restaurant entity) {
+    public static ListRestaurantRecord toRecord(final RestaurantModel entity) {
         return new ListRestaurantRecord(
                 entity.getName(),
                 entity.getFoodType(),

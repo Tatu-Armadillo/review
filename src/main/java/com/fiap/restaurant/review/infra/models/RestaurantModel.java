@@ -8,7 +8,7 @@ import lombok.Data;
 @Entity
 @Table(name = "restaurants")
 @Data
-public class Restaurant {
+public class RestaurantModel {
 
     @Id
     @Column(name = "id_restaurant")
@@ -41,6 +41,6 @@ public class Restaurant {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "address", foreignKey = @ForeignKey(name = "fk_restaurants_address"))
-    private Address address;
+    private AddressModel address;
 
 }

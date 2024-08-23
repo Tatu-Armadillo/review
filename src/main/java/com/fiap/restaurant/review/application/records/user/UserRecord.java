@@ -1,6 +1,6 @@
 package com.fiap.restaurant.review.application.records.user;
 
-import com.fiap.restaurant.review.infra.models.User;
+import com.fiap.restaurant.review.infra.models.UserModel;
 
 public record UserRecord(
         String cpf,
@@ -9,8 +9,8 @@ public record UserRecord(
         String username,
         String password) {
 
-    public static User toEntity(final UserRecord record) {
-        final var entity = new User();
+    public static UserModel toEntity(final UserRecord record) {
+        final var entity = new UserModel();
         entity.setCpf(record.cpf);
         entity.setPhone(record.phone);
         entity.setFullName(record.fullname);
@@ -19,7 +19,7 @@ public record UserRecord(
         return entity;
     }
 
-    public static UserRecord toRecord(final User entity) {
+    public static UserRecord toRecord(final UserModel entity) {
         return new UserRecord(
                 entity.getCpf(),
                 entity.getPhone(),

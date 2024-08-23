@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.fiap.restaurant.review.infra.models.Restaurant;
+import com.fiap.restaurant.review.infra.models.RestaurantModel;
 import com.fiap.restaurant.review.infra.repositories.RestaurantRepository;
 
 @Service
@@ -22,11 +22,11 @@ public class RestaurantService {
         this.addressService = addressService;
     }
 
-    public Page<Restaurant> showResturants(final Pageable pageable, final String name) {
+    public Page<RestaurantModel> showResturants(final Pageable pageable, final String name) {
         return this.restaurantRepository.findAllResturantsByName(pageable, name);
     }
 
-    public Restaurant save(final Restaurant restaurant) {
+    public RestaurantModel save(final RestaurantModel restaurant) {
         final var address = this.addressService.save(restaurant.getAddress());
         restaurant.setAddress(address);
         restaurant.setTotalGrade(0);

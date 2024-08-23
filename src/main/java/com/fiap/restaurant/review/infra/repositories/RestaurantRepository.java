@@ -7,13 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.fiap.restaurant.review.infra.models.Restaurant;
+import com.fiap.restaurant.review.infra.models.RestaurantModel;
 
 @Repository
-public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
+public interface RestaurantRepository extends JpaRepository<RestaurantModel, Long> {
 
-    @Query(" SELECT resturant FROM Restaurant resturant "
+    @Query(" SELECT resturant FROM RestaurantModel resturant "
             + " WHERE LOWER(resturant.name) LIKE LOWER(CONCAT('%', :name, '%')) ")
-    Page<Restaurant> findAllResturantsByName(Pageable pageable, @Param("name") String name);
+    Page<RestaurantModel> findAllResturantsByName(Pageable pageable, @Param("name") String name);
 
 }

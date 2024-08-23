@@ -5,11 +5,11 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.fiap.restaurant.review.infra.models.User;
+import com.fiap.restaurant.review.infra.models.UserModel;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserModel, Long> {
 
-    Optional<User> findUserByCpf(String cpf);
+    Optional<UserModel> findUserByCpf(String cpf);
 
 }

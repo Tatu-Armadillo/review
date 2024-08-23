@@ -3,7 +3,7 @@ package com.fiap.restaurant.review.domain.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fiap.restaurant.review.infra.models.Address;
+import com.fiap.restaurant.review.infra.models.AddressModel;
 import com.fiap.restaurant.review.infra.repositories.AddressRepository;
 
 @Service
@@ -16,7 +16,7 @@ public class AddressService {
         this.addressRepository = addressRepository;
     }
 
-    public Address save(final Address entity) {
+    public AddressModel save(final AddressModel entity) {
         return this.addressRepository.save(entity);
     }
 
