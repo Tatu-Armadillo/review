@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.domain.services;
+package com.fiap.restaurant.review.domain.services.resturant;
 
 import java.time.LocalTime;
 
@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.fiap.restaurant.review.domain.services.address.SaveAddressService;
 import com.fiap.restaurant.review.infra.models.RestaurantModel;
 import com.fiap.restaurant.review.infra.repositories.RestaurantRepository;
 
@@ -14,18 +15,18 @@ import com.fiap.restaurant.review.infra.repositories.RestaurantRepository;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
-    private final AddressService addressService;
+    private final SaveAddressService addressService;
 
     @Autowired
-    public RestaurantService(final RestaurantRepository restaurantRepository, final AddressService addressService) {
+    public RestaurantService(final RestaurantRepository restaurantRepository, final SaveAddressService addressService) {
         this.restaurantRepository = restaurantRepository;
         this.addressService = addressService;
     }
 
-    public Page<RestaurantModel> showResturants(final Pageable pageable, final String name) {
-        return this.restaurantRepository.findAllResturantsByName(pageable, name);
+    public Page<RestaurantModel> findAllAndPageableByFilter(final Pageable pageable, final String filter) {
+        return this.restaurantRepository.findAllResturantsByName(pageable, filter);
     }
-
+    
     public RestaurantModel save(final RestaurantModel restaurant) {
         final var address = this.addressService.save(restaurant.getAddress());
         restaurant.setAddress(address);
