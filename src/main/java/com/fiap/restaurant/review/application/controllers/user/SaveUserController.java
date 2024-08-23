@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.fiap.restaurant.review.application.records.user.UserRecord;
-import com.fiap.restaurant.review.configuration.web.response.ResponseBase;
 import com.fiap.restaurant.review.domain.services.UserService;
+import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

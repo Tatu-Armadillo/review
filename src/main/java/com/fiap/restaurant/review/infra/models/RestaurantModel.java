@@ -17,6 +17,9 @@ public class RestaurantModel {
 
     @Column(name = "name")
     private String name;
+    
+    @Column(name = "cnpj")
+    private String cnpj;
 
     @Column(name = "phone")
     private String phone;

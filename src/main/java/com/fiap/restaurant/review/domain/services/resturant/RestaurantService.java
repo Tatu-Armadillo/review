@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.fiap.restaurant.review.domain.exceptions.NotFoundException;
 import com.fiap.restaurant.review.domain.services.address.SaveAddressService;
 import com.fiap.restaurant.review.infra.models.RestaurantModel;
 import com.fiap.restaurant.review.infra.repositories.RestaurantRepository;
@@ -23,10 +24,15 @@ public class RestaurantService {
         this.addressService = addressService;
     }
 
+    public RestaurantModel findByCnpj(final String cnpj) {
+        return this.restaurantRepository.findResturantByCnpj(cnpj)
+                .orElseThrow(() -> new NotFoundException("m=findByCnpj Not Found Resturante with CNPJ = " + cnpj));
+    }
+
     public Page<RestaurantModel> findAllAndPageableByFilter(final Pageable pageable, final String filter) {
         return this.restaurantRepository.findAllResturantsByName(pageable, filter);
     }
-    
+
     public RestaurantModel save(final RestaurantModel restaurant) {
         final var address = this.addressService.save(restaurant.getAddress());
         restaurant.setAddress(address);

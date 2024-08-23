@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.fiap.restaurant.review.application.records.restaruant.ListRestaurantRecord;
-import com.fiap.restaurant.review.configuration.web.response.ResponseBasePagination;
 import com.fiap.restaurant.review.domain.services.resturant.RestaurantService;
+import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBasePagination;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;

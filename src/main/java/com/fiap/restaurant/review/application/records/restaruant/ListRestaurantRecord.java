@@ -14,7 +14,6 @@ public record ListRestaurantRecord(
                 entity.getFoodType(),
                 entity.getTotalGrade(),
                 entity.getPhone());
-
     }
 
 }
