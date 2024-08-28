@@ -1,5 +1,7 @@
 package com.fiap.restaurant.review.domain.entities;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+
 import com.fiap.restaurant.review.domain.exceptions.UserInvalidCpfException;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class UserEntity {
 
     private Long id;
     private String cpf;
@@ -19,6 +21,7 @@ public class User {
     private String username;
     private String fullName;
     private String password;
+
 
     public void verifyCpf() throws UserInvalidCpfException {
         if(this.cpf == null || this.cpf.length() != 11){
