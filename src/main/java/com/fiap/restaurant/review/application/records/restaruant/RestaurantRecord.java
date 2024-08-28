@@ -8,6 +8,7 @@ public record RestaurantRecord(
         String name,
         String phone,
         String foodType,
+        String cnpj,
         LocalTime openHour,
         LocalTime closeHour,
         Boolean alwaysOpen,
@@ -19,6 +20,7 @@ public record RestaurantRecord(
         entity.setName(record.name);
         entity.setPhone(record.phone);
         entity.setFoodType(record.foodType);
+        entity.setCnpj(record.cnpj);
         entity.setOpenHour(record.openHour);
         entity.setCloseHour(record.closeHour);
         entity.setAlwaysOpen(record.alwaysOpen);
@@ -32,6 +34,7 @@ public record RestaurantRecord(
                 entity.getName(),
                 entity.getPhone(),
                 entity.getFoodType(),
+                entity.getCnpj(),
                 entity.getOpenHour(),
                 entity.getCloseHour(),
                 entity.getAlwaysOpen(),
