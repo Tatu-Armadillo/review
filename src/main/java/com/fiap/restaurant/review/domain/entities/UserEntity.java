@@ -1,18 +1,14 @@
 package com.fiap.restaurant.review.domain.entities;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 
 import com.fiap.restaurant.review.domain.exceptions.UserInvalidCpfException;
+import com.fiap.restaurant.review.infra.models.UserModel;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserEntity {
 
     private Long id;
@@ -21,6 +17,26 @@ public class UserEntity {
     private String username;
     private String fullName;
     private String password;
+
+
+
+    public UserEntity(String cpf, String phone, String username, String fullName, String password) {
+        this.cpf = cpf;
+        this.phone = phone;
+        this.username = username;
+        this.fullName = fullName;
+        this.password = password;
+    }
+
+    public UserModel toModel() {
+        UserModel userModel = new UserModel();
+        userModel.setCpf(this.cpf);
+        userModel.setFullName(this.fullName);
+        userModel.setPassword(this.password);
+        userModel.setPhone(this.phone);
+        userModel.setUsername(this.username);
+        return userModel;
+    }
 
 
     public void verifyCpf() throws UserInvalidCpfException {

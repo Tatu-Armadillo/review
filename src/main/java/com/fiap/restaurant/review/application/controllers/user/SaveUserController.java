@@ -8,6 +8,7 @@ import com.fiap.restaurant.review.application.records.user.UserRecord;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.input.user.SaveUserInput;
 import com.fiap.restaurant.review.domain.services.UserService;
+import com.fiap.restaurant.review.domain.usecases.user.SaveUserUseCase;
 import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,6 +45,9 @@ public class SaveUserController {
         //                 userRecord.fullname(),
         //                 userRecord.password()
         //                 );
+        //         SaveUserUseCase useCase = new SaveUserUseCase();
+        //         useCase.execute(saveUserInput);
+        //         return useCase.getBuscaPedidoOutput();
                                 
         // }
 
