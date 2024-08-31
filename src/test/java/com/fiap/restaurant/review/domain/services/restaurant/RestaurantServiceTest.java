@@ -1,5 +1,6 @@
-package com.fiap.restaurant.review;
+package com.fiap.restaurant.review.domain.services.restaurant;
 
+import com.fiap.restaurant.review.domain.exceptions.NotFoundException;
 import com.fiap.restaurant.review.domain.services.address.SaveAddressService;
 import com.fiap.restaurant.review.domain.services.resturant.RestaurantService;
 import com.fiap.restaurant.review.infra.models.AddressModel;
@@ -7,18 +8,19 @@ import com.fiap.restaurant.review.infra.models.RestaurantModel;
 import com.fiap.restaurant.review.infra.repositories.RestaurantRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalTime;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class RestaurantServiceTest {
 
 	@Mock
@@ -70,5 +72,33 @@ class RestaurantServiceTest {
 		assertNull(savedRestaurant.getOpenHour());
 		assertNull(savedRestaurant.getCloseHour());
 		assertEquals(0, savedRestaurant.getTotalGrade());
+	}
+
+	@Test
+	void testFindByCnpjSuccess() {
+		String cnpj = "12345678000100";
+		RestaurantModel restaurant = new RestaurantModel();
+		restaurant.setCnpj(cnpj);
+
+		when(restaurantRepository.findResturantByCnpj(cnpj)).thenReturn(Optional.of(restaurant));
+
+		RestaurantModel result = restaurantService.findByCnpj(cnpj);
+
+		assertNotNull(result);
+		assertEquals(cnpj, result.getCnpj());
+		verify(restaurantRepository, times(1)).findResturantByCnpj(cnpj);
+	}
+
+	@Test
+	void testFindByCnpjNotFound() {
+		// Arrange
+		String cnpj = "12345678000100";
+
+		when(restaurantRepository.findResturantByCnpj(cnpj)).thenReturn(Optional.empty());
+
+		// Act & Assert
+		NotFoundException exception = assertThrows(NotFoundException.class, () -> restaurantService.findByCnpj(cnpj));
+		assertEquals("m=findByCnpj Not Found Resturante with CNPJ = " + cnpj, exception.getMessage());
+		verify(restaurantRepository, times(1)).findResturantByCnpj(cnpj);
 	}
 }

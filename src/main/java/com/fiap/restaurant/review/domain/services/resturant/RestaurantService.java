@@ -39,7 +39,7 @@ public class RestaurantService {
         restaurant.setTotalGrade(0);
 
         if (restaurant.getAlwaysOpen() != null && restaurant.getAlwaysOpen()) {
-            restaurant.setOpenHour(LocalTime.of(00, 00, 00));
+            restaurant.setOpenHour(LocalTime.of(0, 0, 0));
             restaurant.setCloseHour(LocalTime.of(23, 59, 59));
         }
 
