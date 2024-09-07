@@ -12,8 +12,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -38,19 +43,16 @@ class RestaurantServiceTest {
 	void setUp() {
 		restaurantModel = new RestaurantModel();
 		restaurantModel.setAddress(new AddressModel());
-		restaurantModel.setAlwaysOpen(true); // ou false, dependendo do cenário que deseja testar
+		restaurantModel.setAlwaysOpen(true);
 	}
 
 	@Test
 	void testSaveRestaurantAlwaysOpen() {
-		// Mockando o comportamento do addressService e restaurantRepository
 		when(addressService.save(any(AddressModel.class))).thenReturn(restaurantModel.getAddress());
 		when(restaurantRepository.save(any(RestaurantModel.class))).thenReturn(restaurantModel);
 
-		// Executando o método a ser testado
 		RestaurantModel savedRestaurant = restaurantService.save(restaurantModel);
 
-		// Verificando as alterações feitas no método
 		assertEquals(LocalTime.of(0, 0, 0), savedRestaurant.getOpenHour());
 		assertEquals(LocalTime.of(23, 59, 59), savedRestaurant.getCloseHour());
 		assertEquals(0, savedRestaurant.getTotalGrade());
@@ -58,17 +60,13 @@ class RestaurantServiceTest {
 
 	@Test
 	void testSaveRestaurantNotAlwaysOpen() {
-		// Cenário onde o restaurante não está sempre aberto
 		restaurantModel.setAlwaysOpen(false);
 
-		// Mockando o comportamento do addressService e restaurantRepository
 		when(addressService.save(any(AddressModel.class))).thenReturn(restaurantModel.getAddress());
 		when(restaurantRepository.save(any(RestaurantModel.class))).thenReturn(restaurantModel);
 
-		// Executando o método a ser testado
 		RestaurantModel savedRestaurant = restaurantService.save(restaurantModel);
 
-		// Verificando que as horas de abertura e fechamento não foram alteradas
 		assertNull(savedRestaurant.getOpenHour());
 		assertNull(savedRestaurant.getCloseHour());
 		assertEquals(0, savedRestaurant.getTotalGrade());
@@ -91,14 +89,30 @@ class RestaurantServiceTest {
 
 	@Test
 	void testFindByCnpjNotFound() {
-		// Arrange
 		String cnpj = "12345678000100";
 
 		when(restaurantRepository.findResturantByCnpj(cnpj)).thenReturn(Optional.empty());
 
-		// Act & Assert
 		NotFoundException exception = assertThrows(NotFoundException.class, () -> restaurantService.findByCnpj(cnpj));
 		assertEquals("m=findByCnpj Not Found Resturante with CNPJ = " + cnpj, exception.getMessage());
 		verify(restaurantRepository, times(1)).findResturantByCnpj(cnpj);
+	}
+
+	@Test
+	void testFindAllAndPageableByFilter() {
+		Pageable pageable = PageRequest.of(0, 10);
+		String filter = "Restaurant";
+		List<RestaurantModel> restaurantList = List.of(restaurantModel);
+		Page<RestaurantModel> restaurantPage = new PageImpl<>(restaurantList);
+
+		when(restaurantRepository.findAllResturantsByName(any(Pageable.class), anyString()))
+				.thenReturn(restaurantPage);
+
+		Page<RestaurantModel> result = restaurantService.findAllAndPageableByFilter(pageable, filter);
+
+		assertNotNull(result);
+		assertEquals(1, result.getTotalElements());
+		assertEquals(restaurantModel, result.getContent().get(0));
+		verify(restaurantRepository, times(1)).findAllResturantsByName(pageable, filter);
 	}
 }
