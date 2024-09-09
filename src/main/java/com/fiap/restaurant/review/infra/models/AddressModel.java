@@ -1,7 +1,6 @@
 package com.fiap.restaurant.review.infra.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity

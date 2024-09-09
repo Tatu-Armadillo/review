@@ -1,11 +1,17 @@
 package com.fiap.restaurant.review.infra.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 public class UserModel {
 
     @Id
