@@ -10,9 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Data
-@RequiredArgsConstructor
 @Getter
 @Setter
+@RequiredArgsConstructor
 public class SaveUserOutput implements OutputInterface{
 
     private UserEntity userEntity;

@@ -5,50 +5,48 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.fiap.restaurant.review.application.records.user.UserRecord;
+import com.fiap.restaurant.review.domain.gateway.user.SaveUserInterface;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.input.user.SaveUserInput;
 import com.fiap.restaurant.review.domain.services.UserService;
 import com.fiap.restaurant.review.domain.usecases.user.SaveUserUseCase;
+import com.fiap.restaurant.review.infra.adapter.repository.user.SaveUserRepository;
 import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
+import com.fiap.restaurant.review.infra.repositories.UserRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/user/save")
 @Tag(name = "Users", description = "Endpoints for Managing users")
 public class SaveUserController {
 
-        private final UserService userService;
+        private final UserRepository userRepository;
 
-        @Autowired
-        public SaveUserController(final UserService userService) {
-                this.userService = userService;
-        }
 
         @PostMapping
-        @Operation(tags = {"User"})
-        public ResponseEntity<ResponseBase<UserRecord>> save(@RequestBody final UserRecord userRecord) {
-                // getOutputInterface()
-                // OutputInterface outputInterface = getOutputInterface(userRecord)
-                // SaveUserPresenter(SaveUserOutput)
-                final var response = this.userService.save(UserRecord.toEntity(userRecord));
-                final var base = ResponseBase.of(UserRecord.toRecord(response));
-                return ResponseEntity.ok(base);
+        @Operation(tags = {"Users"})
+        public ResponseEntity<ResponseBase<Object>> save(@RequestBody final UserRecord userRecord) {
+
+                OutputInterface outputInterface = this.getOutputInterface(userRecord);
+                return ResponseEntity.ok(ResponseBase.of(outputInterface.getBody()));
         }
 
-        // private OutputInterface getOutputInterface(UserRecord userRecord){
-        //         SaveUserInput saveUserInput = new SaveUserInput(
-        //                 userRecord.cpf(),
-        //                 userRecord.phone(), 
-        //                 userRecord.username(),
-        //                 userRecord.fullname(),
-        //                 userRecord.password()
-        //                 );
-        //         SaveUserUseCase useCase = new SaveUserUseCase();
-        //         useCase.execute(saveUserInput);
-        //         return useCase.getBuscaPedidoOutput();
+        private OutputInterface getOutputInterface(UserRecord userRecord){
+                SaveUserInput saveUserInput = new SaveUserInput(
+                        userRecord.cpf(),
+                        userRecord.phone(), 
+                        userRecord.username(),
+                        userRecord.fullname(),
+                        userRecord.password()
+                        );
+                SaveUserUseCase useCase = new SaveUserUseCase(new SaveUserRepository(userRepository));
+                useCase.execute(saveUserInput);
+                return useCase.getSaveUserOutput();
                                 
-        // }
+        }
 
 }
