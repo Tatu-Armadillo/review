@@ -2,7 +2,6 @@ package com.fiap.restaurant.review.domain.entities;
 
 
 import com.fiap.restaurant.review.domain.exceptions.UserInvalidCpfException;
-import com.fiap.restaurant.review.infra.models.UserModel;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,14 +27,13 @@ public class UserEntity {
         this.password = password;
     }
 
-    public UserModel toModel() {
-        UserModel userModel = new UserModel();
-        userModel.setCpf(this.cpf);
-        userModel.setFullName(this.fullName);
-        userModel.setPassword(this.password);
-        userModel.setPhone(this.phone);
-        userModel.setUsername(this.username);
-        return userModel;
+    public UserEntity(Long id, String cpf, String phone, String username, String fullName, String password) {
+        this.id = id;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.username = username;
+        this.fullName = fullName;
+        this.password = password;
     }
 
 

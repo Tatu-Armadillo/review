@@ -1,14 +1,11 @@
 package com.fiap.restaurant.review.application.controllers.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.fiap.restaurant.review.application.records.user.UserRecord;
-import com.fiap.restaurant.review.domain.gateway.user.SaveUserInterface;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.input.user.SaveUserInput;
-import com.fiap.restaurant.review.domain.services.UserService;
 import com.fiap.restaurant.review.domain.usecases.user.SaveUserUseCase;
 import com.fiap.restaurant.review.infra.adapter.repository.user.SaveUserRepository;
 import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
