@@ -1,6 +1,6 @@
 package com.fiap.restaurant.review.infra.adapter.repository.user;
 
-import com.fiap.restaurant.review.domain.entities.UserEntity;
+import com.fiap.restaurant.review.domain.entities.user.UserEntity;
 import com.fiap.restaurant.review.domain.gateway.user.SaveUserInterface;
 import com.fiap.restaurant.review.infra.models.UserModel;
 import com.fiap.restaurant.review.infra.repositories.UserRepository;

@@ -1,6 +1,6 @@
 package com.fiap.restaurant.review.domain.output.user;
 
-import com.fiap.restaurant.review.domain.entities.UserEntity;
+import com.fiap.restaurant.review.domain.entities.user.UserEntity;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.generic.output.OutputStatus;
 

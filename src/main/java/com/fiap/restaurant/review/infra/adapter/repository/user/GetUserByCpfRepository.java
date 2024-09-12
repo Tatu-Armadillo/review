@@ -2,7 +2,7 @@ package com.fiap.restaurant.review.infra.adapter.repository.user;
 
 import java.util.Optional;
 
-import com.fiap.restaurant.review.domain.entities.UserEntity;
+import com.fiap.restaurant.review.domain.entities.user.UserEntity;
 import com.fiap.restaurant.review.domain.gateway.user.GetUserByCpfInterface;
 import com.fiap.restaurant.review.infra.models.UserModel;
 import com.fiap.restaurant.review.infra.repositories.UserRepository;
