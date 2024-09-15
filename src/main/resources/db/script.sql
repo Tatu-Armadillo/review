@@ -74,7 +74,7 @@ begin
             close_hour time not null,
             always_open boolean not null,
             total_capacity integer not null,
-            total_grade integer not null,
+            total_grade integer,
             address bigint
         );
 

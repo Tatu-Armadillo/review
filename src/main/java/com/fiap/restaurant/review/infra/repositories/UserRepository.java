@@ -12,5 +12,4 @@ import com.fiap.restaurant.review.infra.models.UserModel;
 public interface UserRepository extends JpaRepository<UserModel, Long> {
 
     Optional<UserModel> findUserByCpf(String cpf);
-
 }

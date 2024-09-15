@@ -29,14 +29,13 @@ public class UserEntity {
         validateUser();
     }
 
-    public UserEntity(Long id, String cpf, String phone, String username, String fullName, String password) throws UserInvalidCpfException {
+    public UserEntity(Long id, String cpf, String phone, String username, String fullName, String password) {
         this.id = id;
         this.cpf = cpf;
         this.phone = phone;
         this.username = username;
         this.fullName = fullName;
         this.password = password;
-        validateUser();
     }
 
     public UserEntity validateUser() throws UserInvalidCpfException {

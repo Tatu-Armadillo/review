@@ -1,47 +1,58 @@
 package com.fiap.restaurant.review.application.controllers.restaurant;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.fiap.restaurant.review.application.records.restaruant.RestaurantRecord;
-import com.fiap.restaurant.review.domain.services.resturant.RestaurantService;
+import com.fiap.restaurant.review.application.records.restaurant.RestaurantRecord;
+import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
+import com.fiap.restaurant.review.domain.input.restaurant.AddressRestaurantInput;
+import com.fiap.restaurant.review.domain.input.restaurant.SaveRestaurantInput;
+import com.fiap.restaurant.review.domain.usecases.restaurant.SaveRestaurantUseCase;
+import com.fiap.restaurant.review.infra.adapter.repository.restaurant.SaveRestaurantRepository;
 import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
+import com.fiap.restaurant.review.infra.repositories.RestaurantRepository;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.*;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/restaurant/save")
 @Tag(name = "Restaurant", description = "Endpoints for Managing Restaurant")
 public class SaveRestaurantController {
         
-        private final RestaurantService restaurantService;
+        private final RestaurantRepository restaurantRepository;
 
-        @Autowired
-        public SaveRestaurantController(final RestaurantService restaurantService) {
-                this.restaurantService = restaurantService;
-        }
+
 
         @PostMapping
         @Transactional
         @Operation(summary = "Create new Restaurant", description = "Save information by Restaurant and address", tags = {
-                        "Restaurant" }, responses = {
-                                        @ApiResponse(description = "Create", responseCode = "200", content = {
-                                                        @Content(mediaType = "application/json", schema = @Schema(implementation = RestaurantRecord.class)),
-                                                        @Content(mediaType = "application/xml", schema = @Schema(implementation = RestaurantRecord.class)) }),
-                                        @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
-                                        @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
-                                        @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
-                        })
-        public ResponseEntity<ResponseBase<RestaurantRecord>> save(
-                        @RequestBody final RestaurantRecord record) {
-                final var response = this.restaurantService.save(RestaurantRecord.toEntity(record));
-                final var base = ResponseBase.of(RestaurantRecord.toRecord(response));
-                return ResponseEntity.ok(base);
+                        "Restaurant" })
+        public ResponseEntity<ResponseBase<Object>> save(
+                        @RequestBody final RestaurantRecord restaurantRecord) {
+                OutputInterface outputInterface = this.getOutputInterface(restaurantRecord);
+                return ResponseEntity.ok(ResponseBase.of(outputInterface.getBody()));
+        }
+
+        private OutputInterface getOutputInterface(RestaurantRecord restaurantRecord){
+                SaveRestaurantInput saveRestaurantInput = new SaveRestaurantInput(
+                        restaurantRecord.name(),
+                        restaurantRecord.phone(),
+                        restaurantRecord.foodType(),
+                        restaurantRecord.cnpj(),
+                        restaurantRecord.openHour(),
+                        restaurantRecord.closeHour(),
+                        restaurantRecord.alwaysOpen(),
+                        restaurantRecord.totalCapacity(),
+                        new AddressRestaurantInput(null, null, null, null, null, null, null, null)
+                        );
+                SaveRestaurantUseCase useCase = new SaveRestaurantUseCase(new SaveRestaurantRepository(restaurantRepository));
+                useCase.execute(saveRestaurantInput);
+                return useCase.getSaveRestaurantOutput();
+                                
         }
 
 }

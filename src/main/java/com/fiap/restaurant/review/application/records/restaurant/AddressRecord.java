@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.application.records.restaruant;
+package com.fiap.restaurant.review.application.records.restaurant;
 
 import com.fiap.restaurant.review.infra.models.AddressModel;
 

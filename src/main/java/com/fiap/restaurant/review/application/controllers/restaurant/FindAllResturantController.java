@@ -9,7 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.fiap.restaurant.review.application.records.restaruant.ListRestaurantRecord;
+import com.fiap.restaurant.review.application.records.restaurant.ListRestaurantRecord;
 import com.fiap.restaurant.review.domain.services.resturant.RestaurantService;
 import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBasePagination;
 

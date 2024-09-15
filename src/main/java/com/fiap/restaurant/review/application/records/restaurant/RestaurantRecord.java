@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.application.records.restaruant;
+package com.fiap.restaurant.review.application.records.restaurant;
 
 import java.time.LocalTime;
 
@@ -6,14 +6,19 @@ import com.fiap.restaurant.review.infra.models.RestaurantModel;
 
 public record RestaurantRecord(
         String name,
+        String cnpj,
         String phone,
         String foodType,
-        String cnpj,
         LocalTime openHour,
         LocalTime closeHour,
         Boolean alwaysOpen,
         Integer totalCapacity,
-        AddressRecord address) {
+        AddressRecord address) 
+        
+        // String name, String cnpj, String phone, String foodType, LocalTime openHour,
+        //     LocalTime closeHour, Boolean alwaysOpen, Integer totalCapacity, Integer totalGrade, AddressEntity address
+        
+        {
 
     public static RestaurantModel toEntity(final RestaurantRecord record) {
         final var entity = new RestaurantModel();
