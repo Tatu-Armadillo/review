@@ -7,10 +7,12 @@ import com.fiap.restaurant.review.infra.models.AddressModel;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class RestaurantEntity {
     private Long id;
     private String name;
