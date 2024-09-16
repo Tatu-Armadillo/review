@@ -17,6 +17,7 @@ public class SaveRestaurantUseCase {
     private final SaveRestaurantInterface saveRestaurantRepository;
     private OutputInterface saveRestaurantOutput;
 
+    // TODO: Add presenter layer to remove ID from the response
     public void execute(SaveRestaurantInput saveRestaurantInput) {
         RestaurantEntity restaurantEntity = new RestaurantEntity(
             saveRestaurantInput.name(),
