@@ -10,6 +10,7 @@ import com.fiap.restaurant.review.domain.input.restaurant.SaveRestaurantInput;
 import com.fiap.restaurant.review.domain.usecases.restaurant.SaveRestaurantUseCase;
 import com.fiap.restaurant.review.infra.adapter.repository.restaurant.SaveRestaurantRepository;
 import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
+import com.fiap.restaurant.review.infra.repositories.AddressRepository;
 import com.fiap.restaurant.review.infra.repositories.RestaurantRepository;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class SaveRestaurantController {
         
         private final RestaurantRepository restaurantRepository;
+        private final AddressRepository addressRepository;
 
 
 
@@ -47,9 +49,18 @@ public class SaveRestaurantController {
                         restaurantRecord.closeHour(),
                         restaurantRecord.alwaysOpen(),
                         restaurantRecord.totalCapacity(),
-                        new AddressRestaurantInput(null, null, null, null, null, null, null, null)
+                        new AddressRestaurantInput(
+                        restaurantRecord.address().cep(),
+                        restaurantRecord.address().publicPlace(),
+                        restaurantRecord.address().complement(),
+                        restaurantRecord.address().neighborhood(),
+                        restaurantRecord.address().city(),
+                        restaurantRecord.address().ufState(),
+                        restaurantRecord.address().latitude(),
+                        restaurantRecord.address().longitude()
+                        )
                         );
-                SaveRestaurantUseCase useCase = new SaveRestaurantUseCase(new SaveRestaurantRepository(restaurantRepository));
+                SaveRestaurantUseCase useCase = new SaveRestaurantUseCase(new SaveRestaurantRepository(restaurantRepository, addressRepository));
                 useCase.execute(saveRestaurantInput);
                 return useCase.getSaveRestaurantOutput();
                                 

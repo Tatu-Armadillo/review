@@ -9,9 +9,7 @@ import com.fiap.restaurant.review.application.records.restaurant.FilterRestauran
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.input.restaurant.FilterRestaurantsInput;
 import com.fiap.restaurant.review.domain.usecases.restaurant.FilterRestaurantsUseCase;
-import com.fiap.restaurant.review.domain.usecases.restaurant.GetAllRestaurantsUseCase;
 import com.fiap.restaurant.review.infra.adapter.repository.restaurant.FilterRestaurantsRepository;
-import com.fiap.restaurant.review.infra.adapter.repository.restaurant.GetAllRestaurantsRepository;
 import com.fiap.restaurant.review.infra.repositories.RestaurantRepository;
 
 import io.swagger.v3.oas.annotations.Operation;

@@ -27,7 +27,16 @@ public class SaveRestaurantUseCase {
             saveRestaurantInput.closeHour(),
             saveRestaurantInput.alwaysOpen(),
             saveRestaurantInput.totalCapacity(),
-            new AddressEntity() // TODO: Insert Address Properly
+            new AddressEntity(
+                saveRestaurantInput.address().cep(),
+                saveRestaurantInput.address().complement(),
+                saveRestaurantInput.address().neighborhood(),
+                saveRestaurantInput.address().publicPlace(),
+                saveRestaurantInput.address().city(),
+                saveRestaurantInput.address().ufState(),
+                saveRestaurantInput.address().latitude(),
+                saveRestaurantInput.address().longitude()
+            )
         );
 
         this.saveRestaurantRepository.saveRestaurant(restaurantEntity);
