@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.Operation;
 @Tag(name = "Restaurant", description = "Endpoints for Managing Restaurant")
 public class FindAllResturantController {
 
-        private final RestaurantRepository restaurantRepository;
+    private final RestaurantRepository restaurantRepository;
 
     @GetMapping
     @Operation(summary = "Show Resturants", description = "find all resturant order by agree", tags = {
@@ -29,7 +29,8 @@ public class FindAllResturantController {
     }
 
     private OutputInterface getOutputInterface(){
-        GetAllRestaurantsUseCase useCase = new GetAllRestaurantsUseCase(new GetAllRestaurantsRepository(restaurantRepository));
+        GetAllRestaurantsUseCase useCase = new GetAllRestaurantsUseCase(
+            new GetAllRestaurantsRepository(restaurantRepository));
         useCase.execute();
         return useCase.getGetAllRestaurantOutput();
     }
