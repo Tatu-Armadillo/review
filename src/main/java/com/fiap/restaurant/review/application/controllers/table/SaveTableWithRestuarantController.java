@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fiap.restaurant.review.application.records.table.SimpleTableRecord;
+import com.fiap.restaurant.review.application.records.booking.SimpleTableRecord;
 import com.fiap.restaurant.review.domain.services.table.TableService;
 import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
 

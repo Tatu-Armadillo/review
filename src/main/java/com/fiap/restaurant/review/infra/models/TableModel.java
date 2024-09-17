@@ -25,8 +25,7 @@ public class TableModel {
     @JoinColumn(name = "restaurant", foreignKey = @ForeignKey(name = "fk_table_restaurant"))
     private RestaurantModel restaurant;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tables_bookings", joinColumns = { @JoinColumn(name = "id_booking") }, inverseJoinColumns = { @JoinColumn(name = "id_table") })
+    @OneToMany(mappedBy = "tables", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BookingModel> bookings;
 
 }

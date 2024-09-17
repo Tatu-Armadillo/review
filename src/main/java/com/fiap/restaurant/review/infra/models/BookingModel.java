@@ -1,7 +1,6 @@
 package com.fiap.restaurant.review.infra.models;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -26,8 +25,8 @@ public class BookingModel {
     @JoinColumn(name = "users", foreignKey = @ForeignKey(name = "fk_booking_users"))
     private UserModel user;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tables_bookings", joinColumns = { @JoinColumn(name = "id_table") }, inverseJoinColumns = { @JoinColumn(name = "id_booking") })
-    private Set<TableModel> bookings;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tables", foreignKey = @ForeignKey(name = "fk_bookings_tables"))
+    private TableModel tables;
 
 }

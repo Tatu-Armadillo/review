@@ -3,8 +3,6 @@ package com.fiap.restaurant.review.domain.entities.restaurant;
 import java.time.LocalTime;
 
 import com.fiap.restaurant.review.domain.entities.address.AddressEntity;
-import com.fiap.restaurant.review.infra.models.AddressModel;
-
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -9,7 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.fiap.restaurant.review.application.records.table.SimpleTableRecord;
+import com.fiap.restaurant.review.application.records.booking.SimpleTableRecord;
 import com.fiap.restaurant.review.domain.services.table.TableService;
 import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBasePagination;
 
@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.media.*;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
-@RequestMapping("/tables/all")
+@RequestMapping("/table/all")
 @Tag(name = "Table", description = "Endpoints for Managing Restaurant")
 public class FindAllTablesController {
 

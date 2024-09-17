@@ -30,7 +30,7 @@ public class TableService {
     public TableModel save(final TableModel entity) {
         final var resturant = this.restaurantService.findByCnpj(entity.getRestaurant().getCnpj());
         entity.setRestaurant(resturant);
-        entity.setAvailable(false);
+        entity.setAvailable(true);
         return this.tableRepository.save(entity);
     }
 
