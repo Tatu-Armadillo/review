@@ -25,7 +25,7 @@ public class ReviewModel {
     private String comment;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "users", foreignKey = @ForeignKey(name = "fk_review_user"))
+    @JoinColumn(name = "user", foreignKey = @ForeignKey(name = "fk_review_user"))
     private UserModel user;
 
     @ManyToOne(fetch = FetchType.EAGER)

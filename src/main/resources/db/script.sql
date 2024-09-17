@@ -59,8 +59,8 @@ begin
             id_review bigserial primary key,
             create_date timestamp not null,
             grade integer not null,
-            comment text not null,
-            users bigint not null,
+            comment text,
+            user bigint not null,
             restaurant bigint not null
         );
 
@@ -94,7 +94,7 @@ begin
         alter table bookings add constraint fk_booking_users foreign key (users) references users (id_user);
         alter table tables_bookings add constraint fk_tables_bookings_table foreign key (id_table) references tables (id_table);
         alter table tables_bookings add constraint fk_tables_bookings_booking foreign key (id_booking) references bookings (id_booking);
-        alter table reviews add constraint fk_review_user foreign key (users) references users (id_user);
+        alter table reviews add constraint fk_review_user foreign key (user) references users (id_user);
         alter table reviews add constraint fk_review_restaurant foreign key (restaurant) references restaurants (id_restaurant);
         alter table restaurants add constraint fk_restaurants_address foreign key (address) references address (id_address);
 
