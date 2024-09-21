@@ -24,12 +24,12 @@ public class ReviewModel {
     @Column(name = "comment")
     private String comment;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user", foreignKey = @ForeignKey(name = "fk_review_user"))
-    private UserModel user;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "restaurant", foreignKey = @ForeignKey(name = "fk_review_restaurant"))
-    private RestaurantModel restaurant;
+     // TODO: Fix typo on "users"
+     @Column(name = "users")
+     private Long userId;
+ 
+     // Chave estrangeira do restaurante (sem o objeto RestaurantModel)
+     @Column(name = "restaurant")
+     private Long restaurantId;
 
 }

@@ -1,7 +1,5 @@
 package com.fiap.restaurant.review.domain.entities.review;
 
-import com.fiap.restaurant.review.infra.models.RestaurantModel;
-import com.fiap.restaurant.review.infra.models.UserModel;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,16 +16,22 @@ public class ReviewEntity {
     private LocalDateTime createDate;
     private Integer grade;
     private String comment;
-    private UserModel user;
-    private RestaurantModel restaurant;
+    private Long userId;
+    private Long restaurantId;
 
-    public ReviewEntity(Integer grade, String comment, UserModel user, RestaurantModel restaurant) {
+    
+    public ReviewEntity(Integer grade, String comment, Long userId, Long restaurantId) {
         this.grade = grade;
         this.comment = comment;
-        this.user = user;
-        this.restaurant = restaurant;
+        this.userId = userId;
+        this.restaurantId = restaurantId;
         this.createDate = LocalDateTime.now();
     }
 
+    
+
+
+
+    
     
 }
