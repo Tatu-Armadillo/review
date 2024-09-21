@@ -21,9 +21,9 @@ public class SaveRestaurantUseCase {
     public void execute(SaveRestaurantInput saveRestaurantInput) {
         RestaurantEntity restaurantEntity = new RestaurantEntity(
             saveRestaurantInput.name(),
+            saveRestaurantInput.cnpj(),
             saveRestaurantInput.phone(),
             saveRestaurantInput.foodType(),
-            saveRestaurantInput.cnpj(),
             saveRestaurantInput.openHour(),
             saveRestaurantInput.closeHour(),
             saveRestaurantInput.alwaysOpen(),

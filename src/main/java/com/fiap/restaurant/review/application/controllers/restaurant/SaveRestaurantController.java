@@ -42,9 +42,9 @@ public class SaveRestaurantController {
         private OutputInterface getOutputInterface(RestaurantRecord restaurantRecord){
                 SaveRestaurantInput saveRestaurantInput = new SaveRestaurantInput(
                         restaurantRecord.name(),
+                        restaurantRecord.cnpj(),
                         restaurantRecord.phone(),
                         restaurantRecord.foodType(),
-                        restaurantRecord.cnpj(),
                         restaurantRecord.openHour(),
                         restaurantRecord.closeHour(),
                         restaurantRecord.alwaysOpen(),

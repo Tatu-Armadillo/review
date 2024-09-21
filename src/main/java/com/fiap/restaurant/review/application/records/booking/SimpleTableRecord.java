@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.application.records.table;
+package com.fiap.restaurant.review.application.records.booking;
 
 import com.fiap.restaurant.review.infra.models.RestaurantModel;
 import com.fiap.restaurant.review.infra.models.TableModel;

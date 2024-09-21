@@ -46,21 +46,16 @@ begin
             id_booking bigserial primary key,
             quantity_people integer not null,
             reserved_date timestamp not null,
-            users bigint not null
-        );
-
-        create table tables_bookings(
-            id_booking bigint not null,
-            id_table bigint not null,
-            primary key (id_booking, id_table)
+            users bigint not null,
+            tables bigint not null
         );
 
         create table reviews(
             id_review bigserial primary key,
             create_date timestamp not null,
             grade integer not null,
-            comment text,
-            user bigint not null,
+            comment text not null,
+            users bigint not null,
             restaurant bigint not null
         );
 
@@ -92,9 +87,8 @@ begin
        
         alter table tables add constraint fk_table_restaurant foreign key (restaurant) references restaurants (id_restaurant);
         alter table bookings add constraint fk_booking_users foreign key (users) references users (id_user);
-        alter table tables_bookings add constraint fk_tables_bookings_table foreign key (id_table) references tables (id_table);
-        alter table tables_bookings add constraint fk_tables_bookings_booking foreign key (id_booking) references bookings (id_booking);
-        alter table reviews add constraint fk_review_user foreign key (user) references users (id_user);
+        alter table bookings add constraint fk_bookings_tables foreign key (tables) references tables (id_table);
+        alter table reviews add constraint fk_review_user foreign key (users) references users (id_user);
         alter table reviews add constraint fk_review_restaurant foreign key (restaurant) references restaurants (id_restaurant);
         alter table restaurants add constraint fk_restaurants_address foreign key (address) references address (id_address);
 
