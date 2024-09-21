@@ -1,7 +1,5 @@
 package com.fiap.restaurant.review.application.controllers.review;
 
-import org.springframework.http.ResponseEntity;
-
 import com.fiap.restaurant.review.application.records.review.PostReviewRecord;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.input.review.PostReviewInput;
@@ -11,10 +9,17 @@ import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
 import com.fiap.restaurant.review.infra.repositories.ReviewRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,7 +32,6 @@ public class PostReviewController {
     @Transactional
     @Operation(tags = {"Review"})
     public ResponseEntity<ResponseBase<Object>> postReview(@RequestBody final PostReviewRecord postReviewRecord){
-        System.out.println("Grade: " + postReviewRecord.grade());
         OutputInterface outputInterface = this.getOutputInterface(postReviewRecord);
         return ResponseEntity.ok(ResponseBase.of(outputInterface.getBody()));
 
