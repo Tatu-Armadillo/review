@@ -4,9 +4,7 @@ import java.time.LocalTime;
 
 import com.fiap.restaurant.review.domain.entities.address.AddressEntity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -37,7 +35,7 @@ public class RestaurantEntity {
         this.address = address;
     }
 
-    
+
 
 
 
