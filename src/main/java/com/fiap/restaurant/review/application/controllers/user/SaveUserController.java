@@ -37,7 +37,7 @@ public class SaveUserController {
                         userRecord.cpf(),
                         userRecord.phone(), 
                         userRecord.username(),
-                        userRecord.fullname(),
+                        userRecord.fullName(),
                         userRecord.password()
                         );
                 SaveUserUseCase useCase = new SaveUserUseCase(new SaveUserRepository(userRepository));
