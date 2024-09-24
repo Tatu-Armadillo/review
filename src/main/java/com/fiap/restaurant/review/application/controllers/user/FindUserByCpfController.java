@@ -3,6 +3,7 @@ package com.fiap.restaurant.review.application.controllers.user;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.fiap.restaurant.review.application.response.GenericResponse;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.usecases.user.GetUserByCpfUseCase;
 import com.fiap.restaurant.review.infra.adapter.repository.user.GetUserByCpfRepository;
@@ -26,12 +27,12 @@ public class FindUserByCpfController {
     @GetMapping
     @Operation(summary = "Find User", description = "Find user by CPF", tags = {
             "Users" })
-    public ResponseEntity<ResponseBase<Object>> findUserByCpf(
+    public ResponseEntity<Object> findUserByCpf(
             @RequestParam(required = true, defaultValue = "") final String cpf) {
 
                 
                 OutputInterface outputInterface = this.getOutputInterface(cpf);
-                return ResponseEntity.ok(ResponseBase.of(outputInterface.getBody()));
+                return new GenericResponse().response(outputInterface);
     }
 
     private OutputInterface getOutputInterface(String cpf){
