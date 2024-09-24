@@ -1,6 +1,7 @@
 package com.fiap.restaurant.review.application.controllers.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fiap.restaurant.review.application.controllers.mock.UserModelTestData;
 import com.fiap.restaurant.review.infra.models.UserModel;
 import com.fiap.restaurant.review.infra.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,25 +37,12 @@ class SaveUserControllerTest {
 
     @Test
     void shouldSaveUserSuccessfully() throws Exception {
-        UserModel userRecord = new UserModel();
-        userRecord.setCpf("92700841132");
-        userRecord.setPhone("65992346784");
-        userRecord.setUsername("userName");
-        userRecord.setFullName("teste");
-        userRecord.setPassword("password");
-        String expectedJson = String.format(
-                "{\"cpf\":\"%s\",\"phone\":\"%s\",\"username\":\"%s\",\"fullName\":\"%s\",\"password\":\"%s\"}",
-                userRecord.getCpf(),
-                userRecord.getPhone(),
-                userRecord.getUsername(),
-                userRecord.getFullName(),
-                userRecord.getPassword()
-        );
-        when(userRepository.save(any(UserModel.class))).thenReturn(userRecord);
+
+        when(userRepository.save(any(UserModel.class))).thenReturn(UserModelTestData.createUser());
 
         mockMvc.perform(post("/user/save")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(expectedJson))
+                        .content(objectMapper.writeValueAsString(UserModelTestData.createUser())))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.cpf").value("92700841132"))
                 .andExpect(jsonPath("$.phone").value("65992346784"))

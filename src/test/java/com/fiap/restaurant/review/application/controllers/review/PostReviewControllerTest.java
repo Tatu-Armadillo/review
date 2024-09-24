@@ -1,10 +1,10 @@
 package com.fiap.restaurant.review.application.controllers.review;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fiap.restaurant.review.application.controllers.mock.ReviewModelTestData;
 import com.fiap.restaurant.review.application.records.review.PostReviewRecord;
 import com.fiap.restaurant.review.infra.models.ReviewModel;
 import com.fiap.restaurant.review.infra.repositories.ReviewRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -28,32 +28,13 @@ class PostReviewControllerTest {
     @MockBean
     private ReviewRepository reviewRepository;
 
-    private PostReviewRecord postReviewRecord;
-
-    @BeforeEach
-    void setUp() {
-        postReviewRecord = new PostReviewRecord(
-                5,
-                "Excellent food and service!",
-                1L,
-                1L
-        );
-    }
-
     @Test
     void postReview() throws Exception {
-        ReviewModel savedReview = new ReviewModel();
-        savedReview.setId(1L);
-        savedReview.setGrade(5);
-        savedReview.setComment("Excellent food and service!");
-        savedReview.setUserId(1L);
-        savedReview.setRestaurantId(1L);
-
-        when(reviewRepository.save(any(ReviewModel.class))).thenReturn(savedReview);
+        when(reviewRepository.save(any(ReviewModel.class))).thenReturn(ReviewModelTestData.createReview());
 
         mockMvc.perform(post("/review/post")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(postReviewRecord)))
+                        .content(new ObjectMapper().writeValueAsString(ReviewModelTestData.createReview())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("Operation performed successfully"))
                 .andExpect(jsonPath("$.success").value(true))
