@@ -2,7 +2,6 @@ package com.fiap.restaurant.review.application.controllers.review;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.restaurant.review.application.controllers.mock.ReviewModelTestData;
-import com.fiap.restaurant.review.application.records.review.PostReviewRecord;
 import com.fiap.restaurant.review.infra.models.ReviewModel;
 import com.fiap.restaurant.review.infra.repositories.ReviewRepository;
 import org.junit.jupiter.api.Test;
