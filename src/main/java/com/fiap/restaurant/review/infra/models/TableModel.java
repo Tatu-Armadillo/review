@@ -1,13 +1,17 @@
 package com.fiap.restaurant.review.infra.models;
 
-import java.util.Set;
-
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "tables")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TableModel {
 
     @Id
