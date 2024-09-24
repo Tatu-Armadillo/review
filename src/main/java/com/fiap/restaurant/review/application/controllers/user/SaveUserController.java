@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.fiap.restaurant.review.application.records.user.UserRecord;
+import com.fiap.restaurant.review.application.response.GenericResponse;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.input.user.SaveUserInput;
 import com.fiap.restaurant.review.domain.usecases.user.SaveUserUseCase;
@@ -26,10 +27,10 @@ public class SaveUserController {
 
         @PostMapping
         @Operation(tags = {"Users"})
-        public ResponseEntity<ResponseBase<Object>> save(@RequestBody final UserRecord userRecord) {
+        public ResponseEntity<Object> save(@RequestBody final UserRecord userRecord) {
 
                 OutputInterface outputInterface = this.getOutputInterface(userRecord);
-                return ResponseEntity.ok(ResponseBase.of(outputInterface.getBody()));
+                return new GenericResponse().response(outputInterface);
         }
 
         private OutputInterface getOutputInterface(UserRecord userRecord){

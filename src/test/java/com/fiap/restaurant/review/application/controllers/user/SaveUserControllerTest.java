@@ -55,14 +55,12 @@ class SaveUserControllerTest {
         mockMvc.perform(post("/user/save")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(expectedJson))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.message").value("Operation performed successfully"))
-                .andExpect(jsonPath("$.data.cpf").value("92700841132"))
-                .andExpect(jsonPath("$.data.phone").value("65992346784"))
-                .andExpect(jsonPath("$.data.username").value("userName"))
-                .andExpect(jsonPath("$.data.fullName").value("teste"))
-                .andExpect(jsonPath("$.data.password").value("password"));
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.cpf").value("92700841132"))
+                .andExpect(jsonPath("$.phone").value("65992346784"))
+                .andExpect(jsonPath("$.username").value("userName"))
+                .andExpect(jsonPath("$.fullName").value("teste"))
+                .andExpect(jsonPath("$.password").value("password"));
 
         verify(userRepository).save(any(UserModel.class));
     }
