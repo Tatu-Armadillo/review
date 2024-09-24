@@ -44,10 +44,10 @@ class SaveUserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(UserModelTestData.createUser())))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.cpf").value("92700841132"))
-                .andExpect(jsonPath("$.phone").value("65992346784"))
+                .andExpect(jsonPath("$.cpf").value("12345678900"))
+                .andExpect(jsonPath("$.phone").value("35991697607"))
                 .andExpect(jsonPath("$.username").value("userName"))
-                .andExpect(jsonPath("$.fullName").value("teste"))
+                .andExpect(jsonPath("$.fullName").value("fullName"))
                 .andExpect(jsonPath("$.password").value("password"));
 
         verify(userRepository).save(any(UserModel.class));

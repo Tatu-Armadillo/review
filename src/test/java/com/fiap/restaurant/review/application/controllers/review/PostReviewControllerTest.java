@@ -1,9 +1,11 @@
 package com.fiap.restaurant.review.application.controllers.review;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fiap.restaurant.review.application.controllers.mock.ReviewModelTestData;
 import com.fiap.restaurant.review.infra.models.ReviewModel;
 import com.fiap.restaurant.review.infra.repositories.ReviewRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -27,17 +29,25 @@ class PostReviewControllerTest {
     @MockBean
     private ReviewRepository reviewRepository;
 
+    private ObjectMapper objectMapper;
+
+    @BeforeEach
+    void setUp() {
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+    }
+
     @Test
     void postReview() throws Exception {
         when(reviewRepository.save(any(ReviewModel.class))).thenReturn(ReviewModelTestData.createReview());
 
         mockMvc.perform(post("/review/post")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(ReviewModelTestData.createReview())))
+                        .content(objectMapper.writeValueAsString(ReviewModelTestData.createReview())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").value("Operation performed successfully"))
                 .andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.data.comment").value("Excellent food and service!"))
+                .andExpect(jsonPath("$.data.comment").value("comment"))
                 .andExpect(jsonPath("$.data.grade").value(5))
                 .andExpect(jsonPath("$.data.userId").value(1))
                 .andExpect(jsonPath("$.data.restaurantId").value(1));
