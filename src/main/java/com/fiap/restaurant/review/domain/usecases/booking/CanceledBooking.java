@@ -24,6 +24,4 @@ public class CanceledBooking {
         this.canceldBookingOutput = new CanceledBookingOutput(entity, new OutputStatus(
                 200, "Update", "Canceled Booking and Clear Table"));
     }
-
-    // CanceledBookingOutput
 }
