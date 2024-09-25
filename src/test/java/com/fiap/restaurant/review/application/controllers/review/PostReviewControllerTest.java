@@ -45,12 +45,10 @@ class PostReviewControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(ReviewModelTestData.createReview())))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("Operation performed successfully"))
-                .andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.data.comment").value("comment"))
-                .andExpect(jsonPath("$.data.grade").value(5))
-                .andExpect(jsonPath("$.data.userId").value(1))
-                .andExpect(jsonPath("$.data.restaurantId").value(1));
+                .andExpect(jsonPath("$.comment").value("comment"))
+                .andExpect(jsonPath("$.grade").value(5))
+                .andExpect(jsonPath("$.userId").value(1))
+                .andExpect(jsonPath("$.restaurantId").value(1));
 
         verify(reviewRepository).save(any(ReviewModel.class));
     }
