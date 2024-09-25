@@ -60,6 +60,6 @@ class SaveRestaurantControllerTest {
                 .andExpect(jsonPath("$.data.totalGrade").value(30))
                 .andExpect(jsonPath("$.data.address.cep").value("37904246"));
 
-        verify(restaurantRepository.save(any(RestaurantModel.class)));
+        verify(restaurantRepository).save(any(RestaurantModel.class));
     }
 }
