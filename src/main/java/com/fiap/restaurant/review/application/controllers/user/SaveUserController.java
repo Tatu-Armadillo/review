@@ -9,7 +9,6 @@ import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.input.user.SaveUserInput;
 import com.fiap.restaurant.review.domain.usecases.user.SaveUserUseCase;
 import com.fiap.restaurant.review.infra.adapter.repository.user.SaveUserRepository;
-import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
 import com.fiap.restaurant.review.infra.repositories.UserRepository;
 
 import io.swagger.v3.oas.annotations.Operation;

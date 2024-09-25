@@ -46,6 +46,7 @@ begin
             id_booking bigserial primary key,
             quantity_people integer not null,
             reserved_date timestamp not null,
+            canceled boolean not null,
             users bigint not null,
             tables bigint not null
         );

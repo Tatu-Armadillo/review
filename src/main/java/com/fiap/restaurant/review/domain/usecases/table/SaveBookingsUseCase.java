@@ -27,6 +27,7 @@ public class SaveBookingsUseCase {
         final var bookingsEntity = new BookingsEntity(
                 saveBookingInput.quantityPeople(),
                 saveBookingInput.dateBook(),
+                false,
                 new UserEntity(null, saveBookingInput.cpfBook(), null, null, null, null),
                 new TableEntity(null, null,
                         new RestaurantEntity(null, saveBookingInput.cnpjRestaurant(), null, null, null, null, null,

@@ -24,6 +24,9 @@ public class BookingModel {
 
     @Column(name = "reserved_date")
     private LocalDateTime reservedDate;
+    
+    @Column(name = "canceled")
+    private Boolean canceled;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "users", foreignKey = @ForeignKey(name = "fk_booking_users"))
