@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
 public class ReviewModelTestData {
 
     public static ReviewModel createReview() {
-        return new ReviewModel(1L, LocalDateTime.now(), 5, "comment", 1L, 1L);
+        return new ReviewModel(null, LocalDateTime.now(), 5, "comment", 1L, 1L);
     }
 }

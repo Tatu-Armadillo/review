@@ -30,7 +30,7 @@ public class SaveBookingsUseCase {
                 new UserEntity(null, saveBookingInput.cpfBook(), null, null, null, null),
                 new TableEntity(null, null,
                         new RestaurantEntity(null, saveBookingInput.cnpjRestaurant(), null, null, null, null, null,
-                                null, null)));
+                                null, null, null)));
 
         this.saveBookingsRepositorys.saveBookings(bookingsEntity);
         this.saveBookingsOutput = new SaveBookingsOutput(bookingsEntity, new OutputStatus(

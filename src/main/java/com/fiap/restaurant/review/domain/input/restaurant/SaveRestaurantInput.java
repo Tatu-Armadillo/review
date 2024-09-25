@@ -12,6 +12,7 @@ public record SaveRestaurantInput(
         LocalTime closeHour,
         Boolean alwaysOpen,
         Integer totalCapacity,
+        Integer totalGrade,
         AddressRestaurantInput address) {
 
 
