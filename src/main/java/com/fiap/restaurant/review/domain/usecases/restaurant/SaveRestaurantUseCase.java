@@ -31,9 +31,9 @@ public class SaveRestaurantUseCase {
             saveRestaurantInput.totalGrade(),
             new AddressEntity(
                 saveRestaurantInput.address().cep(),
+                saveRestaurantInput.address().publicPlace(),
                 saveRestaurantInput.address().complement(),
                 saveRestaurantInput.address().neighborhood(),
-                saveRestaurantInput.address().publicPlace(),
                 saveRestaurantInput.address().city(),
                 saveRestaurantInput.address().ufState(),
                 saveRestaurantInput.address().latitude(),
