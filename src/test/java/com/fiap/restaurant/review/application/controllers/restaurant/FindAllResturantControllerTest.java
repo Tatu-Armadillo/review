@@ -18,12 +18,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(FindAllResturantController.class)
 class FindAllResturantControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private RestaurantRepository restaurantRepository;
-
 
     @Test
     void showAllResturants() throws Exception {
