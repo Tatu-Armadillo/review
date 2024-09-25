@@ -1,6 +1,5 @@
 package com.fiap.restaurant.review.application.controllers.booking;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +18,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/booking/save")
 @Tag(name = "Bookings", description = "Endpoints for Managing Bookings")
 public class SaveBookingsController {
@@ -28,15 +29,6 @@ public class SaveBookingsController {
         private final BookingRepositoy bookingRepositoy;
         private final TableRepository tableRepository;
         private final UserRepository userRepository;
-
-        @Autowired
-        public SaveBookingsController(final BookingRepositoy bookingRepositoy,
-                        final TableRepository tableRepository,
-                        final UserRepository userRepository) {
-                this.bookingRepositoy = bookingRepositoy;
-                this.tableRepository = tableRepository;
-                this.userRepository = userRepository;
-        }
 
         @PostMapping
         @Transactional

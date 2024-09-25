@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fiap.restaurant.review.domain.entities.booking.BookingsEntity;
 import com.fiap.restaurant.review.domain.entities.table.TableEntity;
+import com.fiap.restaurant.review.domain.entities.user.UserEntity;
 import com.fiap.restaurant.review.domain.gateway.booking.GetAllTablesWithBookingsInterface;
 import com.fiap.restaurant.review.infra.repositories.BookingRepositoy;
 
@@ -26,14 +27,20 @@ public class GetAllTablesWithBookingsRepository implements GetAllTablesWithBooki
                     model.getQuantityPeople(),
                     model.getReservedDate(),
                     model.getCanceled(),
-                    null,
+                    new UserEntity(
+                            null,
+                            model.getUser().getCpf(),
+                            model.getUser().getPhone(),
+                            null,
+                            model.getUser().getFullName(),
+                            null),
                     new TableEntity(
                             model.getTables().getCapacity(),
                             model.getTables().getAvailable(),
                             null)));
         });
 
-        return null;
+        return entities;
     }
 
 }

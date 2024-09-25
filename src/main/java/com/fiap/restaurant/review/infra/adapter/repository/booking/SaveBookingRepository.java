@@ -8,20 +8,14 @@ import com.fiap.restaurant.review.infra.repositories.BookingRepositoy;
 import com.fiap.restaurant.review.infra.repositories.TableRepository;
 import com.fiap.restaurant.review.infra.repositories.UserRepository;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public class SaveBookingRepository implements SaveBookingsInterface {
 
     private final BookingRepositoy bookingRepositoy;
     private final TableRepository tableRepository;
     private final UserRepository userRepository;
-
-    public SaveBookingRepository(
-            final BookingRepositoy bookingRepositoy,
-            final TableRepository tableRepository,
-            final UserRepository userRepository) {
-        this.bookingRepositoy = bookingRepositoy;
-        this.tableRepository = tableRepository;
-        this.userRepository = userRepository;
-    }
 
     @Override
     public void saveBookings(final BookingsEntity bookingsEntity) {

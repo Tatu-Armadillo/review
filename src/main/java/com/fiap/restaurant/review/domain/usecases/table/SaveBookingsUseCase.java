@@ -11,16 +11,14 @@ import com.fiap.restaurant.review.domain.input.table.SaveBookingsInput;
 import com.fiap.restaurant.review.domain.output.booking.SaveBookingsOutput;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Getter
 public class SaveBookingsUseCase {
 
     private final SaveBookingsInterface saveBookingsRepositorys;
     private OutputInterface saveBookingsOutput;
-
-    public SaveBookingsUseCase(SaveBookingsInterface saveBookingsRepositorys) {
-        this.saveBookingsRepositorys = saveBookingsRepositorys;
-    }
 
     public void execute(final SaveBookingsInput saveBookingInput) {
 
