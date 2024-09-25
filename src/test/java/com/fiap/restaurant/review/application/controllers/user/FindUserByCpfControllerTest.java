@@ -1,9 +1,7 @@
 package com.fiap.restaurant.review.application.controllers.user;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.restaurant.review.application.controllers.mock.UserModelTestData;
 import com.fiap.restaurant.review.infra.repositories.UserRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -26,13 +24,6 @@ class FindUserByCpfControllerTest {
 
     @MockBean
     private UserRepository userRepository;
-
-    private ObjectMapper objectMapper;
-
-    @BeforeEach
-    void setUp() {
-        objectMapper = new ObjectMapper();
-    }
 
     @Test
     void findUserByCpf() throws Exception {
