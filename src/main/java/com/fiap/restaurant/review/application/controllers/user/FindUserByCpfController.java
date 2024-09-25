@@ -7,7 +7,6 @@ import com.fiap.restaurant.review.application.response.GenericResponse;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.usecases.user.GetUserByCpfUseCase;
 import com.fiap.restaurant.review.infra.adapter.repository.user.GetUserByCpfRepository;
-import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
 import com.fiap.restaurant.review.infra.repositories.UserRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,8 +28,6 @@ public class FindUserByCpfController {
             "Users" })
     public ResponseEntity<Object> findUserByCpf(
             @RequestParam(required = true, defaultValue = "") final String cpf) {
-
-                
                 OutputInterface outputInterface = this.getOutputInterface(cpf);
                 return new GenericResponse().response(outputInterface);
     }

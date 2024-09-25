@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.restaurant.review.application.records.booking.SimpleTableRecord;
 import com.fiap.restaurant.review.domain.services.table.TableService;
-import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -41,10 +40,9 @@ public class SaveTableWithRestuarantController {
                     @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
                     @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
             })
-    public ResponseEntity<ResponseBase<SimpleTableRecord>> save(@RequestBody final SimpleTableRecord record) {
-        final var response = this.tableService.save(SimpleTableRecord.toEntity(record));
-        final var base = ResponseBase.of(SimpleTableRecord.toRecord(response));
-        return ResponseEntity.ok(base);
+    public ResponseEntity<Object> save(@RequestBody final SimpleTableRecord record) {
+        final var response = SimpleTableRecord.toRecord(this.tableService.save(SimpleTableRecord.toEntity(record)));
+        return ResponseEntity.ok(response);
     }
 
 }

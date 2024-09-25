@@ -5,7 +5,6 @@ import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.input.review.PostReviewInput;
 import com.fiap.restaurant.review.domain.usecases.review.PostReviewUseCase;
 import com.fiap.restaurant.review.infra.adapter.repository.review.PostReviewRepository;
-import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
 import com.fiap.restaurant.review.infra.repositories.ReviewRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,20 +29,18 @@ public class PostReviewController {
 
     @PostMapping
     @Transactional
-    @Operation(tags = {"Review"})
-    public ResponseEntity<ResponseBase<Object>> postReview(@RequestBody final PostReviewRecord postReviewRecord){
+    @Operation(tags = { "Review" })
+    public ResponseEntity<Object> postReview(@RequestBody final PostReviewRecord postReviewRecord) {
         OutputInterface outputInterface = this.getOutputInterface(postReviewRecord);
-        return ResponseEntity.ok(ResponseBase.of(outputInterface.getBody()));
-
+        return ResponseEntity.ok(outputInterface.getBody());
     }
 
-    private OutputInterface getOutputInterface(PostReviewRecord postReviewRecord){
+    private OutputInterface getOutputInterface(PostReviewRecord postReviewRecord) {
         PostReviewInput postReviewInput = new PostReviewInput(
-            postReviewRecord.grade(),
-            postReviewRecord.comment(),
-            postReviewRecord.userId(),
-            postReviewRecord.restaurantId()
-            );
+                postReviewRecord.grade(),
+                postReviewRecord.comment(),
+                postReviewRecord.userId(),
+                postReviewRecord.restaurantId());
         PostReviewUseCase useCase = new PostReviewUseCase(new PostReviewRepository(reviewRepository));
         useCase.execute(postReviewInput);
         return useCase.getPostReviewOutput();

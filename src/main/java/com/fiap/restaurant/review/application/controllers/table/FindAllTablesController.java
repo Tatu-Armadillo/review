@@ -1,7 +1,5 @@
 package com.fiap.restaurant.review.application.controllers.table;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.fiap.restaurant.review.application.records.booking.SimpleTableRecord;
 import com.fiap.restaurant.review.domain.services.table.TableService;
-import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBasePagination;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
@@ -40,12 +37,11 @@ public class FindAllTablesController {
                     @ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
                     @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
             })
-    public ResponseEntity<ResponseBasePagination<List<SimpleTableRecord>>> showResturants(
+    public ResponseEntity<Object> showResturants(
             @PageableDefault(sort = "id", direction = Direction.ASC) final Pageable pageable,
             @RequestParam(required = false, defaultValue = "") final String cnpj) {
-        final var response = this.tableService.findAllTablesByResturant(pageable, cnpj);
-        final var base = ResponseBasePagination.of(response.map(SimpleTableRecord::toRecord));
-        return ResponseEntity.ok(base);
+        final var response = this.tableService.findAllTablesByResturant(pageable, cnpj).map(SimpleTableRecord::toRecord);
+        return ResponseEntity.ok(response);
     }
 
 }

@@ -9,7 +9,6 @@ import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.input.table.SaveBookingsInput;
 import com.fiap.restaurant.review.domain.usecases.table.SaveBookingsUseCase;
 import com.fiap.restaurant.review.infra.adapter.repository.booking.SaveBookingRepository;
-import com.fiap.restaurant.review.infra.configuration.web.response.ResponseBase;
 import com.fiap.restaurant.review.infra.repositories.BookingRepositoy;
 import com.fiap.restaurant.review.infra.repositories.TableRepository;
 import com.fiap.restaurant.review.infra.repositories.UserRepository;
@@ -52,7 +51,7 @@ public class SaveBookingsController {
                         })
         public ResponseEntity<Object> save(@RequestBody final BookingsRecord record) {
                 OutputInterface outputInterface = this.getOutputInterface(record);
-                return ResponseEntity.ok(ResponseBase.of(outputInterface.getBody()));
+                return ResponseEntity.ok(outputInterface.getBody());
         }
 
         private OutputInterface getOutputInterface(final BookingsRecord record) {
