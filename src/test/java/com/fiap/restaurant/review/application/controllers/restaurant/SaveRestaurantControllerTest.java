@@ -49,17 +49,15 @@ class SaveRestaurantControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(RestaurantModelTestData.createRestaurant())))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value("Operation performed successfully"))
-                .andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.data.name").value("restaurant"))
-                .andExpect(jsonPath("$.data.cnpj").value("92010209000154"))
-                .andExpect(jsonPath("$.data.phone").value("35991697607"))
-                .andExpect(jsonPath("$.data.foodType").value("comida"))
-                .andExpect(jsonPath("$.data.alwaysOpen").value(true))
-                .andExpect(jsonPath("$.data.totalCapacity").value(20))
-                .andExpect(jsonPath("$.data.totalGrade").value(30))
-                .andExpect(jsonPath("$.data.address.cep").value("37904246"));
+                .andExpect(jsonPath("$.name").value("restaurant"))
+                .andExpect(jsonPath("$.cnpj").value("92010209000154"))
+                .andExpect(jsonPath("$.phone").value("35991697607"))
+                .andExpect(jsonPath("$.foodType").value("comida"))
+                .andExpect(jsonPath("$.alwaysOpen").value(true))
+                .andExpect(jsonPath("$.totalCapacity").value(20))
+                .andExpect(jsonPath("$.totalGrade").value(30))
+                .andExpect(jsonPath("$.address.cep").value("37904246"));
 
-        verify(restaurantRepository.save(any(RestaurantModel.class)));
+        verify(restaurantRepository).save(any(RestaurantModel.class));
     }
 }
