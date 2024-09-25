@@ -1,10 +1,11 @@
 package com.fiap.restaurant.review.domain.entities.restaurant;
 
-import java.time.LocalTime;
-
 import com.fiap.restaurant.review.domain.entities.address.AddressEntity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import lombok.*;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -23,7 +24,7 @@ public class RestaurantEntity {
     private AddressEntity address;
 
     public RestaurantEntity(String name, String cnpj, String phone, String foodType, LocalTime openHour,
-            LocalTime closeHour, Boolean alwaysOpen, Integer totalCapacity, AddressEntity address) {
+            LocalTime closeHour, Boolean alwaysOpen, Integer totalCapacity, Integer totalGrade, AddressEntity address) {
         this.name = name;
         this.cnpj = cnpj;
         this.phone = phone;
@@ -32,6 +33,7 @@ public class RestaurantEntity {
         this.closeHour = closeHour;
         this.alwaysOpen = alwaysOpen;
         this.totalCapacity = totalCapacity;
+        this.totalGrade = totalGrade;
         this.address = address;
     }
 

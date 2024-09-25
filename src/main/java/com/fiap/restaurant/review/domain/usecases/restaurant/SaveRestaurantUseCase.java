@@ -28,6 +28,7 @@ public class SaveRestaurantUseCase {
             saveRestaurantInput.closeHour(),
             saveRestaurantInput.alwaysOpen(),
             saveRestaurantInput.totalCapacity(),
+            saveRestaurantInput.totalGrade(),
             new AddressEntity(
                 saveRestaurantInput.address().cep(),
                 saveRestaurantInput.address().complement(),

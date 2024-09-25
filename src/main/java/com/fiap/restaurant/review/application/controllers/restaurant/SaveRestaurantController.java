@@ -46,7 +46,8 @@ public class SaveRestaurantController {
                                 restaurantRecord.closeHour(),
                                 restaurantRecord.alwaysOpen(),
                                 restaurantRecord.totalCapacity(),
-                                new AddressRestaurantInput(
+                                restaurantRecord.totalGrade(),
+                        new AddressRestaurantInput(
                                                 restaurantRecord.address().cep(),
                                                 restaurantRecord.address().publicPlace(),
                                                 restaurantRecord.address().complement(),

@@ -2,7 +2,6 @@ package com.fiap.restaurant.review.application.controllers.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.restaurant.review.application.controllers.mock.UserModelTestData;
-import com.fiap.restaurant.review.infra.models.UserModel;
 import com.fiap.restaurant.review.infra.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,15 +11,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
+import java.util.Optional;
+
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(SaveUserController.class)
-class SaveUserControllerTest {
+@WebMvcTest(FindUserByCpfController.class)
+class FindUserByCpfControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -36,16 +35,14 @@ class SaveUserControllerTest {
     }
 
     @Test
-    void shouldSaveUserSuccessfully() throws Exception {
+    void findUserByCpf() throws Exception {
+        String cpf = "12345678900";
 
-        when(userRepository.save(any(UserModel.class))).thenReturn(UserModelTestData.createUser());
+        when(userRepository.findUserByCpf(cpf)).thenReturn(Optional.of(UserModelTestData.createUser()));
 
-        mockMvc.perform(post("/user/save")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(UserModelTestData.createUser())))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$").value(UserModelTestData.createUser()));
-
-        verify(userRepository).save(any(UserModel.class));
+        mockMvc.perform(get("/user/find?cpf=" + cpf)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.cpf").value(cpf));
     }
 }
