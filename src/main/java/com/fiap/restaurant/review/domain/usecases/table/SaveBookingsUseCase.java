@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class SaveBookingsUseCase {
 
-    private final SaveBookingsInterface saveBookingsRepositorys;
+    private final SaveBookingsInterface saveBookingsRepository;
     private OutputInterface saveBookingsOutput;
 
     public void execute(final SaveBookingsInput saveBookingInput) {
@@ -31,7 +31,7 @@ public class SaveBookingsUseCase {
                         new RestaurantEntity(null, saveBookingInput.cnpjRestaurant(), null, null, null, null, null,
                                 null, null, null)));
 
-        this.saveBookingsRepositorys.saveBookings(bookingsEntity);
+        this.saveBookingsRepository.saveBookings(bookingsEntity);
         this.saveBookingsOutput = new SaveBookingsOutput(bookingsEntity, new OutputStatus(
                 201, "Created", "Bookings create with table and user"));
     }
