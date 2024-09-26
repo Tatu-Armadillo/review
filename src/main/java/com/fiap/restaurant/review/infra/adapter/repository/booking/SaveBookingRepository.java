@@ -36,6 +36,7 @@ public class SaveBookingRepository implements SaveBookingsInterface {
         bookingModel.setUser(userModel);
         bookingModel.setTables(tableModel);
         this.bookingRepositoy.save(bookingModel);
+        bookingsEntity.setId(bookingModel.getId());
     }
 
 }
