@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.domain.input.table;
+package com.fiap.restaurant.review.domain.input.booking;
 
 import java.time.LocalDateTime;
 

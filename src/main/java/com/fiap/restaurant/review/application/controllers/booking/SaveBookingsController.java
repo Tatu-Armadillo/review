@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.*;
 
 import com.fiap.restaurant.review.application.records.booking.BookingsRecord;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
-import com.fiap.restaurant.review.domain.input.table.SaveBookingsInput;
-import com.fiap.restaurant.review.domain.usecases.table.SaveBookingsUseCase;
+import com.fiap.restaurant.review.domain.input.booking.SaveBookingsInput;
+import com.fiap.restaurant.review.domain.usecases.booking.SaveBookingsUseCase;
 import com.fiap.restaurant.review.infra.adapter.repository.booking.SaveBookingRepository;
 import com.fiap.restaurant.review.infra.repositories.BookingRepositoy;
 import com.fiap.restaurant.review.infra.repositories.TableRepository;

@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.domain.usecases.table;
+package com.fiap.restaurant.review.domain.usecases.booking;
 
 import com.fiap.restaurant.review.domain.entities.booking.BookingsEntity;
 import com.fiap.restaurant.review.domain.entities.restaurant.RestaurantEntity;
@@ -7,7 +7,7 @@ import com.fiap.restaurant.review.domain.entities.user.UserEntity;
 import com.fiap.restaurant.review.domain.gateway.booking.SaveBookingsInterface;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.generic.output.OutputStatus;
-import com.fiap.restaurant.review.domain.input.table.SaveBookingsInput;
+import com.fiap.restaurant.review.domain.input.booking.SaveBookingsInput;
 import com.fiap.restaurant.review.domain.output.booking.SaveBookingsOutput;
 
 import lombok.Getter;

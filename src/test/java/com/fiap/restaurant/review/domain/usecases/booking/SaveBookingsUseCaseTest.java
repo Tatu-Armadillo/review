@@ -1,4 +1,4 @@
-package com.fiap.restaurant.review.domain.usecases.table;
+package com.fiap.restaurant.review.domain.usecases.booking;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -10,7 +10,7 @@ import org.mockito.*;
 
 import com.fiap.restaurant.review.domain.entities.booking.BookingsEntity;
 import com.fiap.restaurant.review.domain.gateway.booking.SaveBookingsInterface;
-import com.fiap.restaurant.review.domain.input.table.SaveBookingsInput;
+import com.fiap.restaurant.review.domain.input.booking.SaveBookingsInput;
 
 public class SaveBookingsUseCaseTest {
 
