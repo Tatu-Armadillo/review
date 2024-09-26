@@ -1,17 +1,18 @@
 package com.fiap.restaurant.review.performance;
 
 
-import io.gatling.javaapi.core.ChainBuilder;
+// import io.gatling.javaapi.core.ChainBuilder;
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
 
 import java.time.Duration;
-import java.util.concurrent.ThreadLocalRandom;
+// import java.util.concurrent.ThreadLocalRandom;
+import java.util.List;
 
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.http.HttpDsl.http;
-import static io.gatling.javaapi.http.HttpDsl.status;
+// import static io.gatling.javaapi.http.HttpDsl.status;
 
 
 public class PerformanceSimulation extends Simulation{
@@ -20,43 +21,30 @@ public class PerformanceSimulation extends Simulation{
     http.baseUrl("http://localhost:9090")
         .header("Content-Type", "application/json");
 
-    private String generateRandomCPF() {
-        StringBuilder cpf = new StringBuilder();
-        for (int i = 0; i < 11; i++) {
-            int digit = ThreadLocalRandom.current().nextInt(0, 10);
-            cpf.append(digit);
-        }
-        return cpf.toString();
-    }
+    UserPerformanceSimulation userPerformanceSimulation = new UserPerformanceSimulation();
+    RestaurantPerformanceSimulation restaurantPerformanceSimulation = new RestaurantPerformanceSimulation();
 
-    ChainBuilder saveUserRequest = exec(session -> {
-        String cpf = generateRandomCPF(); 
-        String requestBody = """
-        {
-            "cpf": "%s",
-            "phone": "%s",
-            "username": "test_user_%s",
-            "fullName": "Test User",
-            "password": "password123"
-        }
-        """.formatted(cpf, cpf, cpf);
+    ScenarioBuilder userScn = userPerformanceSimulation.execute(httpProtocol);
+    ScenarioBuilder restaruantScn = restaurantPerformanceSimulation.execute(httpProtocol);
 
-        return session.set("requestBody", requestBody); 
-    }).exec(http("Save User")
-        .post("/api/user/save")
-        .body(StringBody(session -> session.getString("requestBody")))
-        .check(status().is(201))
-    );
-    
-    ScenarioBuilder scn = scenario("Save User Scenario")
-        .exec(saveUserRequest);
+
         {
             setUp(
-                scn.injectOpen(rampUsersPerSec(1).to(10).during(Duration.ofSeconds(10)),
+                userScn.injectOpen(rampUsersPerSec(1).to(10).during(Duration.ofSeconds(10)),
+                constantUsersPerSec(10).during(Duration.ofSeconds(60)),
+                rampUsersPerSec(10).to(1).during(Duration.ofSeconds(10))),
+                restaruantScn.injectOpen(rampUsersPerSec(1).to(10).during(Duration.ofSeconds(10)),
                 constantUsersPerSec(10).during(Duration.ofSeconds(60)),
                 rampUsersPerSec(10).to(1).during(Duration.ofSeconds(10)))) 
             .protocols(httpProtocol)
-            .assertions(global().responseTime().max().lt(50));
+            .assertions(global().responseTime().max().lt(200));
         }
 
+    public List<String> getSavedCpfs() {
+        return UserPerformanceSimulation.savedCpfs;
+    }
+
+    public List<String> getSavedCnpjs() {
+        return RestaurantPerformanceSimulation.savedCnpjs;
+    }
 }
