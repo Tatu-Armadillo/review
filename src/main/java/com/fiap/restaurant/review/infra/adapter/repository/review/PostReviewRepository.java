@@ -21,6 +21,7 @@ public class PostReviewRepository implements PostReviewInterface {
         reviewModel.setRestaurantId(reviewEntity.getRestaurantId());
         reviewModel.setUserId(reviewEntity.getUserId());
         this.reviewRepository.save(reviewModel);
+        reviewEntity.setId(reviewModel.getId());
     }
 
 }

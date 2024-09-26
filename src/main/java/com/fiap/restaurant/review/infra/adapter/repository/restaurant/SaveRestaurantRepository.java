@@ -26,6 +26,7 @@ public class SaveRestaurantRepository implements SaveRestaurantInterface{
         addressModel.setLatitude(restaurantEntity.getAddress().getLatitude());
         addressModel.setLongitude(restaurantEntity.getAddress().getLongitude());
         this.addressRepository.save(addressModel);
+        restaurantEntity.getAddress().setId(addressModel.getId());
 
         RestaurantModel restaurantModel = new RestaurantModel();
         restaurantModel.setAlwaysOpen(restaurantEntity.getAlwaysOpen());
@@ -39,6 +40,7 @@ public class SaveRestaurantRepository implements SaveRestaurantInterface{
         restaurantModel.setTotalGrade(restaurantEntity.getTotalGrade());
         restaurantModel.setAddress(addressModel);
         this.restaurantRepository.save(restaurantModel);
+        restaurantEntity.setId(restaurantModel.getId());
     }
 
 }

@@ -21,6 +21,7 @@ public class SaveUserRepository implements SaveUserInterface{
         userModel.setPhone(userEntity.getPhone());
         userModel.setUsername(userEntity.getUsername());
         this.userRepository.save(userModel);
+        userEntity.setId(userModel.getId());
     }
 
 }
