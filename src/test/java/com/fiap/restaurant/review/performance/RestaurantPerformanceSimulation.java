@@ -19,6 +19,7 @@ import static io.gatling.javaapi.http.HttpDsl.status;
 public class RestaurantPerformanceSimulation {
 
     public static List<String> savedCnpjs = new ArrayList<>();
+    public static List<String> savedRestaurantIds = new ArrayList<>();
 
     private String generateRandomCNPJ() {
         StringBuilder cnpj = new StringBuilder();
@@ -71,12 +72,17 @@ public class RestaurantPerformanceSimulation {
             .post("/api/restaurant/save")
             .body(StringBody(session -> session.getString("requestBody")))
             .check(status().is(200))
-        );
+            .check(jsonPath("$.id").saveAs("restaurantId"))
+        ).exec(session -> {
+            String restaurantId = session.getString("restaurantId");
+            savedRestaurantIds.add(restaurantId);
+            return session;
+        });
 
         ScenarioBuilder scn = scenario("Save Restaurant Scenario")
             .exec(saveRestaurantRequest)
             .pause(Duration.ofSeconds(1)); 
-            
+
         return scn;
     }
 }
