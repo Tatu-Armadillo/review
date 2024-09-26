@@ -18,5 +18,8 @@ jobs:
           distribution: "adopt"
           cache: maven
 
+      - name: Build Project
+        run: mvn clean install -DskipTests
+
       - name: Run Test
         run: mvn -B test -DskipTests=false --file pom.xml
