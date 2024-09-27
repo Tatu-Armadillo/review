@@ -26,6 +26,6 @@ public class SaveTableUseCase {
         final var entity = new TableEntity(input.capacity(), true, restaurant);
 
         this.saveTableRepository.saveTables(entity);
-        this.saveBookingsOutput = new SaveTablesOutput(entity, new OutputStatus(201, "Created", "Tables created"));
+        this.saveBookingsOutput = new SaveTablesOutput(entity, new OutputStatus(201, "Created", "Tables Created"));
     }
 }
