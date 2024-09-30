@@ -33,6 +33,7 @@ public class SaveBookingRepository implements SaveBookingsInterface {
         final var bookingModel = new BookingModel();
         bookingModel.setQuantityPeople(bookingsEntity.getQuantityPeople());
         bookingModel.setReservedDate(bookingsEntity.getReservedDate());
+        bookingModel.setCanceled(false);
         bookingModel.setUser(userModel);
         bookingModel.setTables(tableModel);
         this.bookingRepositoy.save(bookingModel);
