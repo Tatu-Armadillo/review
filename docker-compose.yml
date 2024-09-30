@@ -27,6 +27,7 @@ services:
       DB_NAME: restaurant_review
       DB_USER: restaurant_review
       DB_PASSWORD: restaurant_review
+      DB_SCHEMA: challenge
     ports:
       - "9090:9090"
     depends_on:
