@@ -54,6 +54,12 @@ Para clonar o projeto, rode o seguinte comando:
 git clone https://github.com/Tatu-Armadillo/parquimetro
 ```
 
+# Variaveis de ambiente:
+Obs.: Configuração padrão para rodar pelo docker com o banco e aplicação em comunicação pela da network restaurant-review-postgres-network 
+```
+PORT_APP, DB_SGDB, DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
+```
+
 # Como executar a aplicação:
 Rode o comando na pasta raíz da aplicação
 ```

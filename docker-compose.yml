@@ -20,6 +20,7 @@ services:
     restart: always
     container_name: spring_boot_app
     environment:
+      PORT_APP: 9090
       DB_SGDB: postgresql
       DB_HOST: postgres_db
       DB_PORT: 5432
