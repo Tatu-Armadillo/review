@@ -4,8 +4,8 @@ build:
 performance-test:
 	mvn gatling:test -P performance-test
 	
-# unit-test:
-# 	mvn test
+tests:
+	mvn test
 
 # integration-test:
 # 	mvn test -P integration-test
