@@ -9,18 +9,6 @@ begin
 
         create schema challenge;
 
-        -- TABELA REFERENTE AO JWT
-        -- create table permission (
-        --     id_permission bigserial primary key,
-        --     description varchar(255) unique
-        -- );
-
-        -- create table user_permission(
-        --     id_user bigint,
-        --     id_permission bigint,
-        --     primary key (id_user, id_permission)
-        -- );
-
         create table users(
             id_user bigserial primary key,
             cpf varchar(11) unique not null,
@@ -28,11 +16,6 @@ begin
             user_name varchar(255) unique not null,
             full_name varchar(255) not null,
             password varchar(255) not null
-            -- COLUNAS REFERENTE AO JWT
-            -- account_non_expired boolean not null,
-            -- account_non_locked boolean not null,
-            -- credentials_non_expired boolean not null,
-            -- enabled boolean not null
         );
 
         create table tables(
@@ -92,14 +75,6 @@ begin
         alter table reviews add constraint fk_review_user foreign key (users) references users (id_user);
         alter table reviews add constraint fk_review_restaurant foreign key (restaurant) references restaurants (id_restaurant);
         alter table restaurants add constraint fk_restaurants_address foreign key (address) references address (id_address);
-
-    --   TABELA REFERENTE AO JWT
-    --   alter table user_permission add constraint fk_user_permission_permission foreign key (id_permission) references permission (id_permission);
-    --   alter table user_permission add constraint fk_user_permission_users foreign key (id_user) references users (id_user);
-    --   password 123456
-    --   insert into challenge.users (user_name,full_name,"password",account_non_expired,account_non_locked,credentials_non_expired,enabled) VALUES ('adm','adm','$2a$10$PqsrFKSSRev9lL0BMAE.IOvDB4r6plBA7c45UDzz4v0Wu1Es9XMs.',true,true,true,true);
-    --   insert into challenge.permission (description) values ('ADMINISTRATOR');
-    --   insert into challenge.user_permission (id_user,id_permission) VALUES (1,1);
     
     end if;
 end $$;
