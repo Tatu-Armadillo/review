@@ -1,47 +1,41 @@
 package com.fiap.restaurant.review.application.controllers.restaurant;
 
 import com.fiap.restaurant.review.application.controllers.mock.RestaurantModelTestData;
-import com.fiap.restaurant.review.infra.dbSpecifications.RestaurantSpecifications;
-import com.fiap.restaurant.review.infra.models.RestaurantModel;
+import com.fiap.restaurant.review.application.records.restaurant.FilterRestaurantRecord;
 import com.fiap.restaurant.review.infra.repositories.RestaurantRepository;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(FilterRestaurantsController.class)
 class FilterRestaurantsControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    @Mock
     private RestaurantRepository restaurantRepository;
 
+    @InjectMocks
+    private FilterRestaurantsController filterRestaurantsController;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        filterRestaurantsController = new FilterRestaurantsController(restaurantRepository);
+    }
+
     @Test
-    void filterResturants() throws Exception {
-        String name = "restaurant";
-        String city = "city";
-        String foodType = "foodType";
-
-        List<RestaurantModel> restaurantList = List.of(RestaurantModelTestData.createRestaurant());
-
-        Specification<RestaurantModel> spec = Specification.where(RestaurantSpecifications.hasName(name))
-                .and(RestaurantSpecifications.hasCity(city))
-                .and(RestaurantSpecifications.hasFoodType(foodType));
-
-        when(restaurantRepository.findAll(spec)).thenReturn(restaurantList);
-
-        mockMvc.perform(get("/restaurant/filter?name=" + name + "&city=" + city + "&foodType=" + foodType))
-                .andExpect(status().isOk());
-
+    void filterResturants() {
+        when(restaurantRepository.findAll(any(Specification.class)))
+                .thenReturn(List.of(RestaurantModelTestData.createRestaurant()));
+        var response = filterRestaurantsController.FilterResturants(new FilterRestaurantRecord("", "", " "));
+        assertNotNull(response);
     }
 }

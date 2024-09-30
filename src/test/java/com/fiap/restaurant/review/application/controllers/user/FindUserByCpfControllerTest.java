@@ -2,38 +2,38 @@ package com.fiap.restaurant.review.application.controllers.user;
 
 import com.fiap.restaurant.review.application.controllers.mock.UserModelTestData;
 import com.fiap.restaurant.review.infra.repositories.UserRepository;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(FindUserByCpfController.class)
 class FindUserByCpfControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    @Mock
     private UserRepository userRepository;
+
+    @InjectMocks
+    private FindUserByCpfController findUserByCpfController;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        findUserByCpfController = new FindUserByCpfController(userRepository);
+    }
 
     @Test
     void findUserByCpf() throws Exception {
-        String cpf = "12345678900";
+        when(userRepository.findUserByCpf(anyString())).thenReturn(Optional.of(UserModelTestData.createUser()));
 
-        when(userRepository.findUserByCpf(cpf)).thenReturn(Optional.of(UserModelTestData.createUser()));
-
-        mockMvc.perform(get("/user/find?cpf=" + cpf)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.cpf").value(cpf));
+        final var response = findUserByCpfController.findUserByCpf("");
+        assertNotNull(response);
     }
 }

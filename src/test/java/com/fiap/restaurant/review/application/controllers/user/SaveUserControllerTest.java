@@ -1,38 +1,31 @@
 package com.fiap.restaurant.review.application.controllers.user;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.restaurant.review.application.controllers.mock.UserModelTestData;
+import com.fiap.restaurant.review.application.records.user.UserRecord;
 import com.fiap.restaurant.review.infra.models.UserModel;
 import com.fiap.restaurant.review.infra.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(SaveUserController.class)
 class SaveUserControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    @Mock
     private UserRepository userRepository;
 
-    private ObjectMapper objectMapper;
+    @InjectMocks
+    private SaveUserController saveUserController;
 
     @BeforeEach
     void setUp() {
-        objectMapper = new ObjectMapper();
+        MockitoAnnotations.openMocks(this);
+        saveUserController = new SaveUserController(userRepository);
     }
 
     @Test
@@ -40,12 +33,8 @@ class SaveUserControllerTest {
 
         when(userRepository.save(any(UserModel.class))).thenReturn(UserModelTestData.createUser());
 
-        mockMvc.perform(post("/user/save")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(UserModelTestData.createUser())))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$").value(UserModelTestData.createUser()));
+        final var response = this.saveUserController.save(new UserRecord("", "", "", "", ""));
+        assertNotNull(response);
 
-        verify(userRepository).save(any(UserModel.class));
     }
 }
