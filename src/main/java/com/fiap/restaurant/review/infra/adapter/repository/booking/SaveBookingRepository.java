@@ -1,6 +1,9 @@
 package com.fiap.restaurant.review.infra.adapter.repository.booking;
 
 import com.fiap.restaurant.review.domain.entities.booking.BookingsEntity;
+import com.fiap.restaurant.review.domain.entities.restaurant.RestaurantEntity;
+import com.fiap.restaurant.review.domain.entities.table.TableEntity;
+import com.fiap.restaurant.review.domain.entities.user.UserEntity;
 import com.fiap.restaurant.review.domain.exceptions.TablesNotAvailableException;
 import com.fiap.restaurant.review.domain.gateway.booking.SaveBookingsInterface;
 import com.fiap.restaurant.review.infra.models.BookingModel;
@@ -38,6 +41,20 @@ public class SaveBookingRepository implements SaveBookingsInterface {
         bookingModel.setTables(tableModel);
         this.bookingRepositoy.save(bookingModel);
         bookingsEntity.setId(bookingModel.getId());
+        bookingsEntity.setQuantityPeople(bookingModel.getQuantityPeople());
+        bookingsEntity.setCanceled(bookingModel.getCanceled());
+        bookingsEntity.setReservedDate(bookingModel.getReservedDate());
+        bookingsEntity.setTableEntity(new TableEntity(
+            bookingModel.getTables().getCapacity(),
+            bookingModel.getTables().getAvailable(),
+            new RestaurantEntity(
+                bookingModel.getTables().getRestaurant().getName()
+            )
+        ));
+        bookingsEntity.setUserEntity(new UserEntity(
+            bookingModel.getUser().getPhone(),
+            bookingModel.getUser().getFullName()
+        ));
     }
 
 }

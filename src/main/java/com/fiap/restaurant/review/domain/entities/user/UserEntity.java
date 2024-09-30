@@ -38,6 +38,11 @@ public class UserEntity {
         this.password = password;
     }
 
+    public UserEntity(String phone, String fullName) {
+        this.phone = phone;
+        this.fullName = fullName;
+    }
+
     public UserEntity validateUser() throws UserInvalidCpfException {
         return new SaveUserValidation().validateEntity(this);
     }

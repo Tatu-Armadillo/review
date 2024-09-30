@@ -1,5 +1,6 @@
 package com.fiap.restaurant.review.infra.adapter.repository.tables;
 
+import com.fiap.restaurant.review.domain.entities.restaurant.RestaurantEntity;
 import com.fiap.restaurant.review.domain.entities.table.TableEntity;
 import com.fiap.restaurant.review.domain.gateway.tables.SaveTableInterface;
 import com.fiap.restaurant.review.infra.models.TableModel;
@@ -25,6 +26,17 @@ public class SaveTableRepository implements SaveTableInterface {
         model.setRestaurant(resturant);
 
         this.tableRepository.save(model);
+        tableEntity.setRestaurant(new RestaurantEntity(
+            resturant.getId(),
+            resturant.getName(),
+            resturant.getCnpj(),
+            resturant.getPhone(),
+            resturant.getFoodType(),
+            resturant.getOpenHour(),
+            resturant.getCloseHour(),
+            resturant.getAlwaysOpen(),
+            resturant.getTotalCapacity()
+            ));
     }
 
 }

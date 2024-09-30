@@ -37,6 +37,23 @@ public class RestaurantEntity {
         this.address = address;
     }
 
+    public RestaurantEntity(Long id, String name, String cnpj, String phone, String foodType, LocalTime openHour,
+            LocalTime closeHour, Boolean alwaysOpen, Integer totalCapacity) {
+        this.id = id;
+        this.name = name;
+        this.cnpj = cnpj;
+        this.phone = phone;
+        this.foodType = foodType;
+        this.openHour = openHour;
+        this.closeHour = closeHour;
+        this.alwaysOpen = alwaysOpen;
+        this.totalCapacity = totalCapacity;
+    }
+
+    public RestaurantEntity(String name) {
+        this.name = name;
+    }
+
 
 
 
