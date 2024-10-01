@@ -48,7 +48,7 @@ public class RestaurantTestIntegration extends AbstractIntegrationTest {
                 .contentType(TestConfigs.CONTENT_TYPE_JSON)
                 .body(new RestaurantRecord(
                         "teste", "12345678910111", "40028922", "teste", LocalTime.of(0, 0, 0), LocalTime.of(0, 0, 0),
-                        true, 1, 1,
+                        true, 1,
                         new AddressRecord("12345678", "teste", "teste", "teste", "teste", "te", 0.0, 0.0)))
                 .when().post().then()
                 .statusCode(200)
