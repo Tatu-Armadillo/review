@@ -19,9 +19,7 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = "Users", description = "Endpoints for Managing users")
 public class FindUserByCpfController {
 
-
     private final UserRepository userRepository;
-
 
     @GetMapping
     @Operation(summary = "Find User", description = "Find user by CPF", tags = {
