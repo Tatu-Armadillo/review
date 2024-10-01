@@ -2,6 +2,7 @@ package com.fiap.restaurant.review.application.controllers.restaurant;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +30,7 @@ public class FilterRestaurantsController {
     summary = "Show Resturants",
     description = "Filter restaurants by name, location or food type",
     tags = {"Restaurant"})
-    public ResponseEntity<Object> FilterResturants(FilterRestaurantRecord filterRestaurantRecord) {
+    public ResponseEntity<Object> FilterResturants(@RequestBody FilterRestaurantRecord filterRestaurantRecord) {
         OutputInterface outputInterface = this.getOutputInterface(filterRestaurantRecord);
         return ResponseEntity.ok(outputInterface.getBody());
     }

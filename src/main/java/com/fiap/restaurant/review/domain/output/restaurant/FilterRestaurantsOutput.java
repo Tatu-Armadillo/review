@@ -17,7 +17,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class FilterRestaurantsOutput implements OutputInterface{
 
-    private List <RestaurantEntity> listRestaurantEntity;
+    private List<RestaurantEntity> listRestaurantEntity;
     private OutputStatus outputStatus;
 
     public FilterRestaurantsOutput(List<RestaurantEntity> listRestaurantEntity, OutputStatus outputStatus) {
