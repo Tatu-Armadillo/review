@@ -11,7 +11,6 @@ public record RestaurantRecord(
                 LocalTime closeHour,
                 Boolean alwaysOpen,
                 Integer totalCapacity,
-                Integer totalGrade,
                 AddressRecord address) {
 
 }

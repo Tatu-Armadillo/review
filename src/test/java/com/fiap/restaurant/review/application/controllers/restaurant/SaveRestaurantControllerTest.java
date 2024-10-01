@@ -37,7 +37,7 @@ class SaveRestaurantControllerTest {
 
         final var response = saveRestaurantController
                 .save(new RestaurantRecord("", "", "", "", LocalTime.now(), LocalTime.now(),
-                        true, 0, 0,
+                        true, 0,
                         new AddressRecord("", "", "", "", "", "", 0.0, 0.0)));
 
         assertNotNull(response);
