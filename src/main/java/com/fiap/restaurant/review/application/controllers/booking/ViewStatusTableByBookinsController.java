@@ -27,7 +27,7 @@ public class ViewStatusTableByBookinsController {
     @Operation(summary = "Show Bookings", description = "find all tables odered by availiable", tags = {
             "Bookings" })
     public ResponseEntity<Object> showAllReviews(
-        @RequestParam(defaultValue = "")  String cnpj,
+        @RequestParam(defaultValue = "") String cnpj,
         @RequestParam(defaultValue = "") LocalDate filterDay ) {
         OutputInterface outputInterface = this.getOutputInterface(cnpj, filterDay);
         return ResponseEntity.ok(outputInterface.getBody());

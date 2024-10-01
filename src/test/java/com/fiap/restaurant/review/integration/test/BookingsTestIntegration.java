@@ -6,20 +6,26 @@ import org.junit.jupiter.api.TestMethodOrder;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.fiap.restaurant.review.application.records.booking.SimpleTableRecord;
+import com.fiap.restaurant.review.application.records.booking.BookingsRecord;
 import com.fiap.restaurant.review.infra.models.AddressModel;
 import com.fiap.restaurant.review.infra.models.RestaurantModel;
+import com.fiap.restaurant.review.infra.models.TableModel;
+import com.fiap.restaurant.review.infra.models.UserModel;
 import com.fiap.restaurant.review.infra.repositories.AddressRepository;
 import com.fiap.restaurant.review.infra.repositories.RestaurantRepository;
+import com.fiap.restaurant.review.infra.repositories.TableRepository;
+import com.fiap.restaurant.review.infra.repositories.UserRepository;
 import com.fiap.restaurant.review.integration.config.TestConfigs;
 import com.fiap.restaurant.review.integration.containers.AbstractIntegrationTest;
 
@@ -32,14 +38,18 @@ import io.restassured.specification.RequestSpecification;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TableTestIntegration extends AbstractIntegrationTest {
+public class BookingsTestIntegration extends AbstractIntegrationTest {
 
     private static RequestSpecification specification;
-    
+
     @Autowired
     private RestaurantRepository restaurantRepository;
     @Autowired
     private AddressRepository addressRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private TableRepository tableRepository;
 
     @BeforeAll
     void setUp() {
@@ -55,7 +65,7 @@ public class TableTestIntegration extends AbstractIntegrationTest {
         address = addressRepository.save(address);
         var restaurant = new RestaurantModel();
         restaurant.setName("teste");
-        restaurant.setCnpj("2234567891011");
+        restaurant.setCnpj("74185296378451");
         restaurant.setPhone("40028922");
         restaurant.setFoodType("teste");
         restaurant.setOpenHour(LocalTime.of(0, 0, 0));
@@ -65,15 +75,29 @@ public class TableTestIntegration extends AbstractIntegrationTest {
         restaurant.setTotalGrade(1);
         restaurant.setAddress(address);
         restaurant = restaurantRepository.save(restaurant);
+
+        var user = new UserModel();
+        user.setCpf("74185296378");
+        user.setPhone("40028922");
+        user.setUsername("teste");
+        user.setFullName("teste");
+        user.setPassword("teste");
+        userRepository.save(user);
+
+        var table = new TableModel();
+        table.setCapacity(2);
+        table.setAvailable(true);
+        table.setRestaurant(restaurant);
+        tableRepository.save(table);
     }
 
     @Test
     @Order(0)
-    void createTableTeste() {
+    void createBookingTeste() {
 
         specification = new RequestSpecBuilder()
                 .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_FRONT)
-                .setBasePath("/api/table/save")
+                .setBasePath("/api/booking/save")
                 .setPort(TestConfigs.SERVER_PORT)
                 .addFilter(new RequestLoggingFilter(LogDetail.ALL))
                 .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
@@ -82,7 +106,8 @@ public class TableTestIntegration extends AbstractIntegrationTest {
         final var response = given()
                 .spec(specification)
                 .contentType(TestConfigs.CONTENT_TYPE_JSON)
-                .body(new SimpleTableRecord(1, "2234567891011"))
+                .body(new BookingsRecord("74185296378451", "74185296378", 2,
+                        LocalDateTime.of(LocalDate.of(2024, 10, 10), LocalTime.of(0, 0, 0))))
                 .when().post().then()
                 .statusCode(200)
                 .extract().body().asString();
@@ -92,13 +117,14 @@ public class TableTestIntegration extends AbstractIntegrationTest {
 
     @Test
     @Order(1)
-    void findAllTablesTeste() {
+    void findAllBookingTeste() {
 
         specification = new RequestSpecBuilder()
                 .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_FRONT)
-                .setBasePath("/api/table/all")
+                .setBasePath("/api/booking/status")
                 .setPort(TestConfigs.SERVER_PORT)
-                .addQueryParam("cnpj", "2234567891011")
+                .addQueryParam("cnpj", "74185296378451")
+                .addQueryParam("filterDay", "2024-10-10")
                 .addFilter(new RequestLoggingFilter(LogDetail.ALL))
                 .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
                 .build();
