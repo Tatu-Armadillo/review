@@ -1,7 +1,6 @@
 package com.fiap.restaurant.review.application.controllers.booking;
 
 import com.fiap.restaurant.review.application.controllers.mock.BookingModelTestData;
-import com.fiap.restaurant.review.domain.input.booking.BookingWithTableStatusFilter;
 import com.fiap.restaurant.review.infra.models.BookingModel;
 import com.fiap.restaurant.review.infra.repositories.BookingRepositoy;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,14 +37,14 @@ class ViewStatusTableByBookinsControllerTest {
     void showAllReviews() {
         List<BookingModel> bookingModelList = List.of(BookingModelTestData.createBooking());
 
-        when(bookingRepositoy.findAllBookingsWithTable(anyString(), any(LocalDateTime.class)))
+        when(bookingRepositoy.findAllBookingsWithTable(anyString(), any(LocalDateTime.class), any(LocalDateTime.class)))
                 .thenReturn(bookingModelList);
 
-        var res = this.viewStatusTableByBookinsController.
-                showAllReviews(new BookingWithTableStatusFilter("", LocalDate.now()));
+        var res = this.viewStatusTableByBookinsController.showAllReviews("", LocalDate.now());
 
         assertNotNull(res);
 
-        verify(bookingRepositoy).findAllBookingsWithTable(anyString(), any(LocalDateTime.class));
+        verify(bookingRepositoy).findAllBookingsWithTable(anyString(), any(LocalDateTime.class),
+                any(LocalDateTime.class));
     }
 }

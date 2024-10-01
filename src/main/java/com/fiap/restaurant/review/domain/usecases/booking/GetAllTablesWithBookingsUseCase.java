@@ -1,6 +1,6 @@
 package com.fiap.restaurant.review.domain.usecases.booking;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.fiap.restaurant.review.domain.gateway.booking.GetAllTablesWithBookingsInterface;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
@@ -12,12 +12,12 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class GetAllTablesWithBookings {
+public class GetAllTablesWithBookingsUseCase {
     
     private final GetAllTablesWithBookingsInterface getAllTablesWithBookingsInterface;
     private OutputInterface getAllTablesWithBookingsOutput;
 
-    public void execute(String cnpj, LocalDateTime filterDay ){
+    public void execute(String cnpj, LocalDate filterDay ){
         final var listRestaurantsEntities = this.getAllTablesWithBookingsInterface.getAllTablesWithBookingsAndResturant(cnpj, filterDay);
         this.getAllTablesWithBookingsOutput = new GetAllTablesWithBookingsOutput(listRestaurantsEntities,
         new OutputStatus(200,

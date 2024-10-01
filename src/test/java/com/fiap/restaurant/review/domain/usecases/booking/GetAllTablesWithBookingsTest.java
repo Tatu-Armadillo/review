@@ -8,7 +8,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -26,25 +26,24 @@ public class GetAllTablesWithBookingsTest {
     private GetAllTablesWithBookingsInterface getAllTablesWithBookingsRepository;
 
     @InjectMocks
-    private GetAllTablesWithBookings getAllTablesWithBookings;
+    private GetAllTablesWithBookingsUseCase getAllTablesWithBookings;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        getAllTablesWithBookings = new GetAllTablesWithBookings(getAllTablesWithBookingsRepository);
+        getAllTablesWithBookings = new GetAllTablesWithBookingsUseCase(getAllTablesWithBookingsRepository);
     }
 
     @Test
     void testExecute() {
 
-        when(getAllTablesWithBookingsRepository
-                .getAllTablesWithBookingsAndResturant(anyString(), any(LocalDateTime.class)))
+        when(getAllTablesWithBookingsRepository.getAllTablesWithBookingsAndResturant(anyString(), any(LocalDate.class)))
                 .thenReturn(List.of(new BookingsEntity()));
 
-        getAllTablesWithBookings.execute("", LocalDateTime.now());
+        getAllTablesWithBookings.execute("", LocalDate.now());
 
         verify(getAllTablesWithBookingsRepository, times(1))
-                .getAllTablesWithBookingsAndResturant(anyString(), any(LocalDateTime.class));
+                .getAllTablesWithBookingsAndResturant(anyString(), any(LocalDate.class));
 
         final var output = getAllTablesWithBookings.getGetAllTablesWithBookingsOutput();
         assertEquals(200, output.getOutputStatus().getCode());

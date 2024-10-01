@@ -1,5 +1,5 @@
 server:
-  port: ${PORT_APP}
+  port: ${PORT_APP:9090}
   servlet:
     context-path: /api
 
@@ -7,9 +7,9 @@ spring:
   application:
     name: Restaurant Review
   datasource:
-    url: jdbc:${DB_SGDB}://${DB_HOST}:${DB_PORT}/${DB_NAME}?currentSchema=${DB_SCHEMA}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    url: jdbc:${DB_SGDB:postgresql}://${DB_HOST:localhost}:${DB_PORT:3310}/${DB_NAME:restaurant_review}?currentSchema=${DB_SCHEMA:challenge}
+    username: ${DB_USER:restaurant_review}
+    password: ${DB_PASSWORD:restaurant_review}
   jpa:
     properties:
       hibernate:

@@ -1,6 +1,6 @@
 package com.fiap.restaurant.review.domain.usecases.booking;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.fiap.restaurant.review.domain.gateway.booking.CanceledBookingInterface;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
@@ -12,12 +12,12 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class CanceledBooking {
+public class CanceledBookingUseCase {
 
     private final CanceledBookingInterface canceledBookingRepository;
     private OutputInterface canceldBookingOutput;
 
-    public void execute(final String cpf, LocalDateTime reservedDate) {
+    public void execute(final String cpf, LocalDate reservedDate) {
 
         final var entity = this.canceledBookingRepository.canceledBooking(cpf, reservedDate);
 

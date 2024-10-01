@@ -7,7 +7,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,25 +24,25 @@ public class CanceledBookingTest {
     private CanceledBookingInterface canceledBookingRepository;
 
     @InjectMocks
-    private CanceledBooking canceledBooking;
+    private CanceledBookingUseCase canceledBooking;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        canceledBooking = new CanceledBooking(canceledBookingRepository);
+        canceledBooking = new CanceledBookingUseCase(canceledBookingRepository);
     }
 
     @Test
     void testExecute() {
 
-        when(canceledBookingRepository.canceledBooking(anyString(), any(LocalDateTime.class)))
+        when(canceledBookingRepository.canceledBooking(anyString(), any(LocalDate.class)))
                 .thenReturn(new BookingsEntity());
 
-        canceledBooking.execute("", LocalDateTime.now());
+        canceledBooking.execute("", LocalDate.now());
 
         final var output = canceledBooking.getCanceldBookingOutput();
 
-        verify(canceledBookingRepository, times(1)).canceledBooking(anyString(), any(LocalDateTime.class));
+        verify(canceledBookingRepository, times(1)).canceledBooking(anyString(), any(LocalDate.class));
 
         assertEquals(200, output.getOutputStatus().getCode());
         assertEquals("Update", output.getOutputStatus().getCodeName());

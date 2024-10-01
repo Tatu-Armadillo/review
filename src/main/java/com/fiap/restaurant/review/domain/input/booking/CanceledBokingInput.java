@@ -1,9 +1,9 @@
 package com.fiap.restaurant.review.domain.input.booking;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record CanceledBokingInput(
         String cpf,
-        LocalDateTime reservedDate) {
+        LocalDate reservedDate) {
 
 }

@@ -2,7 +2,6 @@ package com.fiap.restaurant.review.infra.repositories;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,18 +17,20 @@ public interface BookingRepositoy extends JpaRepository<BookingModel, Long> {
                         + " WHERE booking.tables.available = false "
                         + " AND booking.tables.restaurant.cnpj = :cnpj "
                         + " AND booking.canceled = false "
-                        + " AND booking.reservedDate = :reservedDate ")
+                        + " AND booking.reservedDate BETWEEN :startDay AND :closeDay")
         List<BookingModel> findAllBookingsWithTable(
                         @Param("cnpj") String cnpj,
-                        @Param("reservedDate") LocalDateTime reservedDate);
+                        @Param("startDay") LocalDateTime startDay,
+                        @Param("closeDay") LocalDateTime closeDay);
 
         @Query(" SELECT booking FROM BookingModel booking "
                         + " WHERE booking.tables.available = false "
                         + " AND booking.canceled = false "
                         + " AND booking.user.cpf = :cpf "
-                        + " AND booking.reservedDate = :reservedDate ")
-        Optional<BookingModel> findBookingByUserCpfAndReservedDate(
+                        + " AND booking.reservedDate BETWEEN :startDay AND :closeDay")
+        List<BookingModel> findBookingByUserCpfAndReservedDate(
                         @Param("cpf") String cpf,
-                        @Param("reservedDate") LocalDateTime reservedDate);
+                        @Param("startDay") LocalDateTime startDay,
+                        @Param("closeDay") LocalDateTime closeDay);
 
 }

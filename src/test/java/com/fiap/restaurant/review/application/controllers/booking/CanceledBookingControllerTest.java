@@ -9,8 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Optional;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -34,13 +35,13 @@ class CanceledBookingControllerTest {
 
     @Test
     void canceledBookings() {
-        when(bookingRepositoy.findBookingByUserCpfAndReservedDate(anyString(), any(LocalDateTime.class)))
-                .thenReturn(Optional.of(BookingModelTestData.createBooking()));
+        when(bookingRepositoy.findBookingByUserCpfAndReservedDate(anyString(), any(LocalDateTime.class), any(LocalDateTime.class)))
+                .thenReturn(List.of(BookingModelTestData.createBooking()));
 
-        var res = this.canceledBookingController.canceledBookings(new CanceledBokingInput("", LocalDateTime.now()));
+        var res = this.canceledBookingController.canceledBookings(new CanceledBokingInput("", LocalDate.now()));
 
         assertNotNull(res);
 
-        verify(bookingRepositoy).findBookingByUserCpfAndReservedDate(anyString(), any(LocalDateTime.class));
+        verify(bookingRepositoy).findBookingByUserCpfAndReservedDate(anyString(), any(LocalDateTime.class), any(LocalDateTime.class));
     }
 }
