@@ -4,8 +4,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.fiap.restaurant.review.application.records.booking.SimpleTableRecord;
+import com.fiap.restaurant.review.application.response.GenericResponse;
+import com.fiap.restaurant.review.application.response.PresenterResponse;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.input.table.SaveTablesInput;
+import com.fiap.restaurant.review.domain.output.tables.SaveTablesOutput;
+import com.fiap.restaurant.review.domain.presenters.table.SaveTablePresenter;
 import com.fiap.restaurant.review.domain.usecases.table.SaveTableUseCase;
 import com.fiap.restaurant.review.infra.adapter.repository.tables.SaveTableRepository;
 import com.fiap.restaurant.review.infra.repositories.RestaurantRepository;
@@ -41,7 +45,14 @@ public class SaveTableController {
                                         @ApiResponse(description = "Internal Error", responseCode = "500", content = @Content)
                         })
         public ResponseEntity<Object> save(@RequestBody final SimpleTableRecord record) {
-                return ResponseEntity.ok(this.getOutputInterface(record));
+                OutputInterface outputInterface = this.getOutputInterface(record);
+
+                if (outputInterface.getOutputStatus().getCode() != 201) {
+                        return new GenericResponse().response(outputInterface);
+                }
+
+                SaveTablePresenter presenter = new SaveTablePresenter((SaveTablesOutput) outputInterface);
+                return new PresenterResponse().response(presenter);
         }
 
         private OutputInterface getOutputInterface(final SimpleTableRecord record) {

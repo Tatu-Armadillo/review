@@ -4,8 +4,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.fiap.restaurant.review.application.records.booking.BookingsRecord;
+import com.fiap.restaurant.review.application.response.GenericResponse;
+import com.fiap.restaurant.review.application.response.PresenterResponse;
 import com.fiap.restaurant.review.domain.generic.output.OutputInterface;
 import com.fiap.restaurant.review.domain.input.booking.SaveBookingsInput;
+import com.fiap.restaurant.review.domain.output.booking.SaveBookingsOutput;
+import com.fiap.restaurant.review.domain.presenters.booking.SaveBookingPresenter;
 import com.fiap.restaurant.review.domain.usecases.booking.SaveBookingsUseCase;
 import com.fiap.restaurant.review.infra.adapter.repository.booking.SaveBookingRepository;
 import com.fiap.restaurant.review.infra.repositories.BookingRepositoy;
@@ -43,7 +47,12 @@ public class SaveBookingsController {
                         })
         public ResponseEntity<Object> save(@RequestBody final BookingsRecord record) {
                 OutputInterface outputInterface = this.getOutputInterface(record);
-                return ResponseEntity.ok(outputInterface.getBody());
+                if (outputInterface.getOutputStatus().getCode() != 201) {
+                return new GenericResponse().response(outputInterface);
+                }
+
+                SaveBookingPresenter presenter = new SaveBookingPresenter((SaveBookingsOutput) outputInterface);
+                return new PresenterResponse().response(presenter);
         }
 
         private OutputInterface getOutputInterface(final BookingsRecord record) {
