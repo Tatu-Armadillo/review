@@ -1,7 +1,6 @@
 package com.fiap.restaurant.review.application.controllers.restaurant;
 
 import com.fiap.restaurant.review.application.controllers.mock.RestaurantModelTestData;
-import com.fiap.restaurant.review.application.records.restaurant.FilterRestaurantRecord;
 import com.fiap.restaurant.review.infra.repositories.RestaurantRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +34,7 @@ class FilterRestaurantsControllerTest {
     void filterResturants() {
         when(restaurantRepository.findAll(any(Specification.class)))
                 .thenReturn(List.of(RestaurantModelTestData.createRestaurant()));
-        var response = filterRestaurantsController.FilterResturants(new FilterRestaurantRecord("", "", " "));
+        var response = filterRestaurantsController.FilterResturants("", "", "");
         assertNotNull(response);
     }
 }

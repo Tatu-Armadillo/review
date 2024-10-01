@@ -19,10 +19,14 @@ import lombok.RequiredArgsConstructor;
 public class FilterRestaurantsRepository implements FilterRestaurantsInterface {
     private final RestaurantRepository restaurantRepository;
 
-    public List<RestaurantEntity> filterRestaurants(FilterRestaurantsInput filterRestaurantsInput){
-        Specification<RestaurantModel> spec = Specification.where(RestaurantSpecifications.hasName(filterRestaurantsInput.name()))
-                                                           .and(RestaurantSpecifications.hasCity(filterRestaurantsInput.city()))
-                                                           .and(RestaurantSpecifications.hasFoodType(filterRestaurantsInput.foodType()));
+    public List<RestaurantEntity> filterRestaurants(FilterRestaurantsInput filterRestaurantsInput) {
+        Specification<RestaurantModel> spec = Specification
+                .where(RestaurantSpecifications.hasName(filterRestaurantsInput.name()))
+                .or(RestaurantSpecifications.hasName(""))
+                .and(RestaurantSpecifications.hasCity(filterRestaurantsInput.city()))
+                .or(RestaurantSpecifications.hasCity(""))
+                .and(RestaurantSpecifications.hasFoodType(filterRestaurantsInput.foodType()))
+                .or(RestaurantSpecifications.hasFoodType(""));
         List<RestaurantModel> listRestaurantModels = this.restaurantRepository.findAll(spec);
         List<RestaurantEntity> listRestaurantsEntities = new ArrayList<RestaurantEntity>();
         for (RestaurantModel model : listRestaurantModels) {
@@ -53,6 +57,6 @@ public class FilterRestaurantsRepository implements FilterRestaurantsInterface {
         }
         return listRestaurantsEntities;
 
-    } 
+    }
 
 }
