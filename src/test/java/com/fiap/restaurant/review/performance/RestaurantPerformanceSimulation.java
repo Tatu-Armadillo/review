@@ -50,7 +50,6 @@ public class RestaurantPerformanceSimulation {
                 "closeHour": "%s",
                 "alwaysOpen": false,
                 "totalCapacity": 50,
-                "totalGrade": 5,
                 "address": {
                     "cep": "12345678",
                     "publicPlace": "Main St",
