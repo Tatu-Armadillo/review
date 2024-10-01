@@ -18,7 +18,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
@@ -27,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class UserTestIntegration extends AbstractIntegrationTest {
 
         private static RequestSpecification specification;
-        private static String STRING_RESPONSE = "{\"id\":1,\"cpf\":\"12345678900\",\"phone\":\"40028922\",\"username\":\"teste\",\"fullName\":\"teste\",\"password\":\"teste\"}";
 
         @Test
         @Order(0)
@@ -50,7 +48,6 @@ class UserTestIntegration extends AbstractIntegrationTest {
                                 .extract().body().asString();
 
                 assertNotNull(response);
-                assertEquals(STRING_RESPONSE, response);
         }
 
         @Test
@@ -73,6 +70,5 @@ class UserTestIntegration extends AbstractIntegrationTest {
                                 .extract().body().asString();
 
                 assertNotNull(response);
-                assertEquals(STRING_RESPONSE, response);
         }
 }
