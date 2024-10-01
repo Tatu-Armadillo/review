@@ -42,7 +42,7 @@ class UserTestIntegration extends AbstractIntegrationTest {
                 final var response = given()
                                 .spec(specification)
                                 .contentType(TestConfigs.CONTENT_TYPE_JSON)
-                                .body(new UserRecord("12345678900", "40028922", "teste", "teste", "teste"))
+                                .body(new UserRecord("11122233344", "40028933", "teste", "teste1", "teste1"))
                                 .when().post().then()
                                 .statusCode(201)
                                 .extract().body().asString();
@@ -57,7 +57,7 @@ class UserTestIntegration extends AbstractIntegrationTest {
                                 .addHeader(TestConfigs.HEADER_PARAM_ORIGIN, TestConfigs.ORIGIN_FRONT)
                                 .setBasePath("/api/user/find")
                                 .setPort(TestConfigs.SERVER_PORT)
-                                .addQueryParam("cpf", "12345678900")
+                                .addQueryParam("cpf", "11122233344")
                                 .addFilter(new RequestLoggingFilter(LogDetail.ALL))
                                 .addFilter(new ResponseLoggingFilter(LogDetail.ALL))
                                 .build();
