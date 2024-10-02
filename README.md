@@ -10,6 +10,9 @@ Parte II: https://youtu.be/bYqWZD6PEOo
 
 Parte III: https://youtu.be/b-NeyskRwY8
 
+# Acesso ao projeto hospedado no GCP
+Link: http://34.44.125.46:9090/api/swagger-ui/index.html
+
 # Sobre o projeto
 Este projeto foi desenvolvido como parte do Tech Challenge, um desafio técnico que engloba os conhecimentos adquiridos em diversas disciplinas do curso. O objetivo principal é a criação de um Sistema de Reserva e Avaliação de Restaurantes, seguindo os princípios da Clean Architecture e utilizando Spring Boot e seu ecossistema.
 
